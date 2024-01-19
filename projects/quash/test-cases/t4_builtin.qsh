@@ -1,0 +1,9 @@
+# Stress pwd
+pwd | grep -o '[^/]*$'
+pwd > pwd.txt
+cat pwd.txt | grep -o '[^/]*$'
+
+# Stress echo
+echo hello\\\\n | xargs printf
+echo hello > echo.txt
+cat echo.txt

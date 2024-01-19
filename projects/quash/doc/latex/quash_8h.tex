@@ -1,0 +1,77 @@
+\hypertarget{quash_8h}{}\section{src/quash.h File Reference}
+\label{quash_8h}\index{src/quash.\+h@{src/quash.\+h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}execute.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structQuashState}{Quash\+State}
+\begin{DoxyCompactList}\small\item\em Holds information about the state and environment Quash is running in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{quash_8h_a136a489a4e9b848158123d54d0e76f06}\label{quash_8h_a136a489a4e9b848158123d54d0e76f06}} 
+typedef struct \hyperlink{structQuashState}{Quash\+State} \hyperlink{quash_8h_a136a489a4e9b848158123d54d0e76f06}{Quash\+State}
+\begin{DoxyCompactList}\small\item\em Holds information about the state and environment Quash is running in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structQuashState}{Quash\+State} \hyperlink{quash_8h_a94906260ab98390c63de6eca0764dbb1}{initial\+\_\+state} ()
+\begin{DoxyCompactList}\small\item\em Create the initial \hyperlink{structQuashState}{Quash\+State} structure. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{quash_8h_ab43880685b2507434e4a84f2cb9d54d4}{get\+\_\+command\+\_\+string} ()
+\begin{DoxyCompactList}\small\item\em Get a deep copy of the current command string. \end{DoxyCompactList}\item 
+bool \hyperlink{quash_8h_a61da580fc69a74f3ef17956ba5fd88a0}{is\+\_\+running} ()
+\begin{DoxyCompactList}\small\item\em Query if quash should accept more input or not. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{quash_8h_a4d364efdccd1dec2290413c6ae28959c}\label{quash_8h_a4d364efdccd1dec2290413c6ae28959c}} 
+void \hyperlink{quash_8h_a4d364efdccd1dec2290413c6ae28959c}{end\+\_\+main\+\_\+loop} ()
+\begin{DoxyCompactList}\small\item\em Causes the execution loop to end. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Quash essential functions and structures. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{quash_8h_ab43880685b2507434e4a84f2cb9d54d4}\label{quash_8h_ab43880685b2507434e4a84f2cb9d54d4}} 
+\index{quash.\+h@{quash.\+h}!get\+\_\+command\+\_\+string@{get\+\_\+command\+\_\+string}}
+\index{get\+\_\+command\+\_\+string@{get\+\_\+command\+\_\+string}!quash.\+h@{quash.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+command\+\_\+string()}{get\_command\_string()}}
+{\footnotesize\ttfamily char$\ast$ get\+\_\+command\+\_\+string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get a deep copy of the current command string. 
+
+\begin{DoxyNote}{Note}
+The free function must be called on the result eventually
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+A copy of the command string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{quash_8h_a94906260ab98390c63de6eca0764dbb1}\label{quash_8h_a94906260ab98390c63de6eca0764dbb1}} 
+\index{quash.\+h@{quash.\+h}!initial\+\_\+state@{initial\+\_\+state}}
+\index{initial\+\_\+state@{initial\+\_\+state}!quash.\+h@{quash.\+h}}
+\subsubsection{\texorpdfstring{initial\+\_\+state()}{initial\_state()}}
+{\footnotesize\ttfamily \hyperlink{structQuashState}{Quash\+State} initial\+\_\+state (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create the initial \hyperlink{structQuashState}{Quash\+State} structure. 
+
+\begin{DoxyReturn}{Returns}
+Returns a copy of the initialized state. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{quash_8h_a61da580fc69a74f3ef17956ba5fd88a0}\label{quash_8h_a61da580fc69a74f3ef17956ba5fd88a0}} 
+\index{quash.\+h@{quash.\+h}!is\+\_\+running@{is\+\_\+running}}
+\index{is\+\_\+running@{is\+\_\+running}!quash.\+h@{quash.\+h}}
+\subsubsection{\texorpdfstring{is\+\_\+running()}{is\_running()}}
+{\footnotesize\ttfamily bool is\+\_\+running (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Query if quash should accept more input or not. 
+
+\begin{DoxyReturn}{Returns}
+True if Quash should accept more input and false otherwise 
+\end{DoxyReturn}

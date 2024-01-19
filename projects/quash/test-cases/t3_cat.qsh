@@ -1,0 +1,8 @@
+export SMALL_FILE=./dir2/test1.txt
+export LARGE_FILE=./valgrind_expected.txt
+export OUT_FILE=./out.txt
+
+cat $LARGE_FILE > $OUT_FILE
+cat $SMALL_FILE > $OUT_FILE
+cat $OUT_FILE
+diff $OUT_FILE $SMALL_FILE

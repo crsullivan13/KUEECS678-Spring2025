@@ -1,0 +1,8 @@
+# Get a list of files as a file
+ls > ls.txt
+
+# Run long complicated command
+grep -v dir1 < ls.txt | xargs -I'{}' find '{}' -type f | grep lorem_ipsum | xargs sort > filtered.txt
+
+# Output result
+cat < filtered.txt

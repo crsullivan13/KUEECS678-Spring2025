@@ -1,0 +1,11 @@
+# Print 'Hello World!' after one second
+delayed_echo 'Hello World!' 1 &
+
+# Terminate the echo before it completes
+kill 9 1
+
+# Print something
+echo This should be the last line
+
+# Wait for output from delayed_echo in case it was not actually killed
+sleep 2

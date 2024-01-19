@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html
+xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Oswald|Roboto" rel="stylesheet">
+<title>Lab 1 - Debugger(gdb)</title>
+<style type="text/css">
+.heading1 {
+	font-family: 'Oswald', sans-serif;
+	font-size: xx-large;
+	text-align: Center;
+	color: grey;
+}
+.heading2 {
+	font-family: 'Roboto', sans-serif;
+	font-size: large;
+}
+.body1 {
+	font-family: 'Roboto', sans-serif;
+	font-size: large;
+}
+.body2 {
+	font-family: 'Roboto', sans-serif;
+	font-size: large;
+}
+.coding1 {
+	font-family: 'Cutive Mono', monospace;
+	font-size: medium;
+}
+</style>
+</head>
+
+<body>
+
+<p class="heading1"><strong>Lab 1 - Using the Debugger</strong></p>
+<hr color="red" width="100%" size=2px>
+
+<p class="heading2">In this lab, we cover how to use the debugger with a
+sample program. You will need to fix numerous errors in the program using GDB
+and Valgrind.</p>
+
+<p class="heading1">Lab Materials</p>
+<hr color="red" width="100%" size=2px>
+
+<ul class="body1">
+	<li><a href="GDBLab.pdf">Slides</a></li>
+	<li><a href="eecs678-debuggers-lab.tar.gz">Lab materials</a></li>
+</ul>
+
+<p class"heading1">Discussion Videos</p>
+<ol>
+	<li><a href="https://kansas-my.sharepoint.com/:v:/g/personal/i887h927_home_ku_edu/EUn4NzuqtRZChlE_9H09kNYB6r_vjjVF-_hp64wzYTqMvA?e=nkK4FG">Part-1 (Shell basics and setup)</a></li>
+	<li><a href="https://kansas-my.sharepoint.com/:v:/g/personal/i887h927_home_ku_edu/EQfdKFRBhwJOuHsd9ZngNLQByuZx4Isoh9umuDPAOqw1aQ?e=T6rhV1">Part-2 (Pointers)</a></li>
+	<li><a href="https://kansas-my.sharepoint.com/:v:/g/personal/i887h927_home_ku_edu/Ecgc4i5X7dlPgdDTqmVjGIkBPe4dU_esDQYfOCpNPHj-ZQ?e=JXQ9ZY">Part-3 (GDB)</a></li>
+	<li><a href="https://kansas-my.sharepoint.com/:v:/g/personal/i887h927_home_ku_edu/Ec4XMtN-AO1HhUvTGi5-WLgB763PZH5Sk4sWVJLsoUwkWA?e=UFIUf8">Part-4 (Valgrind)</a></li>
+</ol>
+
+<p class="heading1">Assignment</p>
+<hr color="red" width="100%" size=2px>
+
+<span class="body1"> 
+The sample program currently produces a segmentation fault:
+</span>
+
+<pre class="coding1">$ ./bugs
+The current bug population of Earth is about: 1480000000000000000
+The current bug population of Mars is about: 140727437236104
+The current bug population of Venus is about: 0
+The total bug population of the solar system is: 1480000000000000000
+The most useless bug is a butterfly Segmentation fault (core dumped)</pre> 
+
+<span class="body1"> 
+Your tasks for this lab are as follows: 
+
+<ol>
+	<li>
+		Observe and explain the reasons for the memory leaks in the valgrind_test.c program (with the help of valgrind). Propose solutions to resolve the memory leaks.
+	</li>
+	<li>Find and fix all of the problems of "bugs.c" with the aid of  
+		debugger (gdb and valgrind). When you are finished, the test output should print:
+	</li>
+</ol>
+</span>
+
+<pre class="coding1">$ make test
+gcc -g bugs.c -o bugs
+valgrind --leak-check=full ./bugs > bugs_output.txt 2> valgrind_output.txt
+
+=======================================
+VALGRIND DIFF
+---------------------------------------
+
+=======================================
+PROGRAM DIFF
+---------------------------------------
+
+$ cat bugs_output.txt
+The current bug population of Earth is about: 1480000000000000000
+The current bug population of Mars is about: 0
+The current bug population of Venus is about: 0
+The total bug population of the solar system is: 1480000000000000000
+The most useless bug is a mosquito
+The most colorful bug is a butterfly
+The most colorful bug is a a is bug colorful most The
+The current bug adjective is: (null)
+Bugs didn't cause me to crash!
+
+$ cat valgrind_output.txt
+==#== Memcheck, a memory error detector
+==#== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==#== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==#== Command: ./bugs
+==#== 
+==#==
+==#== HEAP SUMMARY:
+==#==     in use at exit: 0 bytes in 0 blocks
+==#==   total heap usage: 7 allocs, 7 frees, 35 bytes allocated
+==#== 
+==#== All heap blocks were freed -- no leaks are possible
+==#== 
+==#== For counts of detected and suppressed errors, rerun with: -v
+==#== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</pre>
+
+<p class="heading1">Evaluation</p>
+<hr color="red" width="100%" size=2px>
+
+<span class="body1"> 
+<ul>
+	<li>20% (bugs.c) - Correct output from Valgrind</li>
+	<li>40% (bugs.c) - Correct output from GDB </li>
+	<li>20% (valgrind_test.c) - Report explaining your observation of and ways to solve each of the memory leakage issues in valgrind_test.c</li>
+	<li>10% (Quiz) - A short quiz on GDB and valgrind will be open on following week during the lab hours  </li>
+	<li>10% (Demo) - A quick demo of your submission will be taken on the following week during the lab hours </li>
+</ul>
+
+Please compress your source code along with your written report and submit through Canvas.
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<p><a href="../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>

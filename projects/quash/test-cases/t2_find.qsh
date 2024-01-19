@@ -1,0 +1,2 @@
+# Find all files starting with valgrind in sandbox/dir3
+find $PWD/dir3 -name valgrind'*' -type f

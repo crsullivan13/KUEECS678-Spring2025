@@ -1,0 +1,11 @@
+Background job started: [1]	#PID#	delayed_echo hello 2 & 
+Background job started: [2]	#PID#	echo world & 
+world
+Completed: 	[2]	#PID#	echo world & 
+hello
+Completed: 	[1]	#PID#	delayed_echo hello 2 & 
+dir1
+dir2
+dir3
+lorem_ipsum.txt
+valgrind_expected.txt

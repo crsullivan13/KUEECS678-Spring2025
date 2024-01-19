@@ -1,0 +1,63 @@
+\begin{quote}
+\end{quote}
+\hypertarget{index_autotoc_md0}{}\doxysection{E\+E\+C\+S 678 -\/ The Buddy Allocator}\label{index_autotoc_md0}
+\hypertarget{index_autotoc_md1}{}\doxysubsection{Introduction}\label{index_autotoc_md1}
+In this assignment, you must complete the buddy allocator. Most of the implementation has already been done for you.
+
+{\bfseries{A full description of the buddy algorithm can be found \href{../../buddy-description.pdf}{\texttt{ here}}.}}\hypertarget{index_autotoc_md2}{}\doxysubsection{Installation}\label{index_autotoc_md2}
+To only build the buddy allocator use\+: \begin{quote}
+{\ttfamily \$ make} \end{quote}
+
+
+To generate this documentation in H\+T\+ML use\+:
+
+\begin{quote}
+{\ttfamily \$ make doc} \end{quote}
+
+
+To clean the project use\+: \begin{quote}
+{\ttfamily \$ make clean} \end{quote}
+\hypertarget{index_autotoc_md3}{}\doxysubsection{Usage}\label{index_autotoc_md3}
+To run the executable use\+: \begin{quote}
+{\ttfamily \$ ./buddy $<$ test-\/files/test\+\_\+sample1.\+txt} \end{quote}
+or \begin{quote}
+{\ttfamily \$ ./buddy -\/i test-\/files/test\+\_\+sample1.\+txt} \end{quote}
+\hypertarget{index_autotoc_md4}{}\doxysubsection{What to Implement}\label{index_autotoc_md4}
+\hypertarget{index_autotoc_md5}{}\doxyparagraph{\mbox{[}\+Allocation\mbox{]}}\label{index_autotoc_md5}
+\begin{quote}
+{\ttfamily void$\ast$ buddy\+\_\+alloc (int size);} \end{quote}
+
+
+On a memory request, the allocator returns the head of a free-\/list of the matching size (i.\+e., smallest block that satisfies the request). If the free-\/list of the matching block size is empty, then a larger block size will be selected. The selected (large) block is then splitted into two smaller blocks. Among the two blocks, left block will be used for allocation or be further splitted while the right block will be added to the appropriate free-\/list.\hypertarget{index_autotoc_md6}{}\doxyparagraph{\mbox{[}\+Free\mbox{]}}\label{index_autotoc_md6}
+\begin{quote}
+{\ttfamily void \mbox{\hyperlink{buddy_8h_a961ef8a2fd9df43d50945100f172b97a}{buddy\+\_\+free(void $\ast$addr)}};} \end{quote}
+
+
+Whenever a block is freed, the allocator checks its buddy. If the buddy is free as well, then the two buddies are combined to form a bigger block. This process continues until one of the buddies is not free.
+
+How to find buddy and check if the buddy is free? Suppose we have block B1 of order O, we can compute the buddy using the formula below.
+
+\begin{quote}
+{\ttfamily B2 = B1 X\+OR (1 $<$$<$ O)} \end{quote}
+We provide a convenient macro \mbox{\hyperlink{buddy_8c_aae7263f0e40a1e0dfefa6f53652a4a05}{B\+U\+D\+D\+Y\+\_\+\+A\+D\+D\+R()}} for you.\hypertarget{index_autotoc_md7}{}\doxysubsection{Testing}\label{index_autotoc_md7}
+Be sure you thoroughly test your program. We will use different test files than the ones provided to you. We have provided a simple test case to demonstrate how to write the test cases. We have also provided a testing script {\ttfamily runtests.\+sh} which will run all of your test files in the test-\/files directory. To execute all of your tests in that directory, simply use either\+:
+
+\begin{quote}
+{\ttfamily \$ make test} \end{quote}
+or \begin{quote}
+{\ttfamily \$ ./run\+\_\+tests.sh} \end{quote}
+
+
+All test files must be located in the test-\/files directory and have the prefix \char`\"{}test\+\_\+\char`\"{} (i.\+e. test\+\_\+sample2.\+txt). The file test\+\_\+sample2.\+txt has the following lines in it\+:
+
+\begin{quote}
+{\ttfamily a = alloc(44\+K)} ~\newline
+ {\ttfamily free(a)} \end{quote}
+
+
+This test case allocates a 64 kilo-\/byte block of memory and assigns it to the variable \textquotesingle{}a\textquotesingle{}. If the \textquotesingle{}K\textquotesingle{} in the size argument is removed, then this call will only request 44 bytes. This test case then releases the block that is assigned to \textquotesingle{}a\textquotesingle{} with the free command. Variable names can only be one character long, alphabetic letters.
+
+Output must match exactly for credit. We have provided some sample output from our implementation in the test-\/files directory. All files that you wish to compare tests against should be located in the test-\/files directory and must match the name of its corresponding test file with the prefix \char`\"{}result\+\_\+\char`\"{} instead of \char`\"{}test\+\_\+\char`\"{}. These result files should be manually created by hand. Nothing you add to the code should print to standard output by the time you submit the project.\hypertarget{index_autotoc_md8}{}\doxysubsection{Grading}\label{index_autotoc_md8}
+10\% per working test file we provide. We have 12 test files we use for grading so you may get up to a 120\%.
+
+Again, we have provided two test cases as examples of files we will use to grade your project, however we encourage you to create your own to test and discover various corner cases you may encounter. 

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Lab 6 - The Dining Philosopher's Problem</title>
+<style type="text/css">
+.auto-style1 {
+	font-size: xx-large;
+}
+.auto-style2 {
+	font-size: large;
+}
+</style>
+</head>
+
+<body title="Lab 6 - The Dining Philosopher's Problem">
+
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style1">
+		<b style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: x-large; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: -webkit-left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(204, 204, 204);">
+		Lab 6: The Dining Philosopher's Problem</b></td>
+	</tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+In this lab, we consider an instance of the dining philosopher's problem 
+implemented using PThreads. We propose and implement two solutions to this 
+problem using the synchronization mechnanisms we have discussed in previous 
+labs.</span><p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+Issues addressed by this lab include:</p>
+<ul style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+	<li>Practice reading code using Pthreads</li>
+	<li>Practice using Pthread mutexes</li>
+	<li>Practice using Pthread condition variables</li>
+	<li>Practice analyzing concurrency control problems</li>
+</ul>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Lab Materials</strong></td>
+	</tr>
+</table>
+<ol>
+	<li><a href="DiningPhilosophers.pdf">Slides</a></li>
+	<li><a href="eecs678-pthreads_dp-lab.tar.gz">Lab Files</a></li>
+	<li>
+		<a href="https://mediahub.ku.edu/media/Lab9_DiningPhilosophers/1_h33fp5oj">Video Discussion</a><br/><br/>
+		<iframe id="kmsembed-1_h33fp5oj" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_h33fp5oj/uiConfId/45147491" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Kaltura Player"></iframe><br/><br/>
+	</li>
+</ol>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Assignment</strong></td>
+	</tr>
+</table>
+
+<p>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+Modify the starter code to prevent deadlock using two methods: <br/>(1) asymmetric 
+locking order in different philosophers and <br/>(2) use of a Pthreads condition 
+variable to simulate the presence of a waiter that will give both or neither of 
+the chopsticks to a philosopher in an atomic operation.</span></p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Submission</strong></td>
+	</tr>
+</table>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+You need to zip up your lab for submission. For this step, you should use the 'zip' target included in the lab's Makefile. Change the STUDENT_ID variable 
+in the Makefile to your student ID and type:</span><pre style="color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">    make zip</pre>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+Please ensure that you have checked your final solution on the cycle servers before submission.
+&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Evaluation</strong></td>
+	</tr>
+</table>
+<p>
+	<ul>
+			<li>dp_asymmetric - 40%</li>
+			<li>dp_waiter - 40%</li>
+			<li>Demo - 10%</li>
+			<li>In-class Quiz - 10%</li>
+	</ul>
+</p>
+<p><a href="../index.html">&lt; Back to the Lab Home Page</a></p>
+</body>
+
+</html>

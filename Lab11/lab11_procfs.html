@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Lab-11 /proc file system</title>
+<style type="text/css">
+.auto-style1 {
+	font-size: xx-large;
+}
+.auto-style2 {
+	font-size: large;
+}
+</style>
+</head>
+
+<body title="Lab">
+
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style1">
+		<b style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: x-large; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: -webkit-left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(204, 204, 204);">
+		Lab 11: The<span class="Apple-converted-space">&nbsp;</span><font face="arial">/proc</font><span class="Apple-converted-space">&nbsp;</span>Filesystem</b></td>
+	</tr>
+</table>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+In this lab, we will learn about the<span class="Apple-converted-space">&nbsp;</span><font face="arial">/proc</font><span class="Apple-converted-space">&nbsp;</span>filesystem. 
+We will use the<span class="Apple-converted-space">&nbsp;</span><font face="arial">/proc</font><span class="Apple-converted-space">&nbsp;</span>filesystem 
+to detect deadlock in an instance of the dining philosopher's problem.</p>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+Issues addressed by this lab include:</p>
+<ul style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+	<li>Understand the /proc Virtual Filesystem</li>
+	<li>Use the data in /proc with the help of Unix file operations</li>
+</ul>
+<p>&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Lab Materials</strong></td>
+	</tr>
+</table>
+<ol>
+	<li><a href="ProcFS.pdf">Slides</a></li>
+	<li><a href="eecs678-procfs-lab.tar.gz">Lab Files</a></li>
+	<li>
+		<a href="https://mediahub.ku.edu/media/Lab12_ProcFileSystem/1_oho3f4z2">Video Discussion</a><br/><br/>
+		<iframe id="kmsembed-1_oho3f4z2" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_oho3f4z2/uiConfId/45147491" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Kaltura Player"></iframe><br/><br/>
+	</li>
+</ol>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Assignment</strong></td>
+	</tr>
+</table>
+
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+For this lab, you need to complete the implementation of the<span class="Apple-converted-space">&nbsp;</span><b>dine</b><span class="Apple-converted-space">&nbsp;</span>program. 
+This program behaves identically to the program we saw in Dining Philosophers 
+lab, but instead of using global state to detect deadlock, we will use 
+information from the /proc filesystem.</p>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+We should be able to build the program using a Makefile submitted with your 
+solution. An example output of running dine is shown below:</p>
+<pre style="color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">	 [gumapath-$] ./dine 
+
+	 User time:	169 / 169	178 / 178	210 / 210	191 / 191	201 / 201	
+	 System time:	5 / 5		5 / 5		8 / 8		7 / 7		5 / 5		
+	 
+	 User time:	156 / 325	125 / 303	170 / 380	166 / 357	178 / 379	
+	 System time:	9 / 14		7 / 12		6 / 14		6 / 13		7 / 12		
+
+	 User time:	146 / 471	171 / 474	192 / 572	155 / 512	171 / 550	
+	 System time:	8 / 22		8 / 20		7 / 21		5 / 18		5 / 17		
+	 
+	 User time:	152 / 623	187 / 661	199 / 771	155 / 667	174 / 724	
+	 System time:	4 / 26		7 / 27		7 / 28		5 / 23		5 / 22	</pre>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+&nbsp;</p>
+
+
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Submission</strong></td>
+	</tr>
+</table>
+
+<p>Before submission, please make sure that your code is running on the cycle servers.</p>
+<p>Once you are done with the lab, please use the "Make zip" target in the Makefile. Please remember to replace the Xs at the top of the Makefile with your KUID. Submissions should be through Canvas.</p><br/>
+
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Evaluation</strong></td>
+	</tr>
+</table>
+
+<p>
+	<ul>
+		<li>Source code - 80%</li>
+		<li> In class Quiz - 10%</li>
+		<li> Demo - 10%</li>
+	</ul>
+</p>
+
+<hr>
+<p><a href="../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>

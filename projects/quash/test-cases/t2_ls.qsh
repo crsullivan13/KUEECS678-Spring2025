@@ -1,0 +1,3 @@
+# List all contents including hidden files and directories in the sandbox
+# directory.
+ls -a

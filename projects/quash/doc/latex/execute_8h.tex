@@ -1,0 +1,306 @@
+\hypertarget{execute_8h}{}\section{src/execute.h File Reference}
+\label{execute_8h}\index{src/execute.\+h@{src/execute.\+h}}
+
+
+Functions for interpreting and running commands.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}command.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{execute_8h_afeab372587374ba444aa9bdfb6cfa0d8}{lookup\+\_\+env} (const char $\ast$env\+\_\+var)
+\begin{DoxyCompactList}\small\item\em Function to get environment variable values. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_afa91981c1edd7bb1c86292d80b27e170}{write\+\_\+env} (const char $\ast$env\+\_\+var, const char $\ast$val)
+\begin{DoxyCompactList}\small\item\em Function to set and define environment variable values. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{execute_8h_acd83b7572960ddecb86a6f96d82fa040}{get\+\_\+current\+\_\+directory} (bool $\ast$should\+\_\+free)
+\begin{DoxyCompactList}\small\item\em Get the real current working directory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{execute_8h_a3a843950dd6e83519c8a1a7ad8d8d827}\label{execute_8h_a3a843950dd6e83519c8a1a7ad8d8d827}} 
+void \hyperlink{execute_8h_a3a843950dd6e83519c8a1a7ad8d8d827}{check\+\_\+jobs\+\_\+bg\+\_\+status} ()
+\begin{DoxyCompactList}\small\item\em Check on background jobs to see if they have exited. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_a0b272e2a39868632c7cdf1f66abca817}{print\+\_\+job} (int job\+\_\+id, pid\+\_\+t pid, const char $\ast$cmd)
+\begin{DoxyCompactList}\small\item\em Print a job to standard out. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_ae6dddf9eadf2166be12825dd40dbd644}{print\+\_\+job\+\_\+bg\+\_\+start} (int job\+\_\+id, pid\+\_\+t pid, const char $\ast$cmd)
+\begin{DoxyCompactList}\small\item\em Print the start up of a background job to standard out. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_a9fbab67c786201a8f3266661bd0917c5}{print\+\_\+job\+\_\+bg\+\_\+complete} (int job\+\_\+id, pid\+\_\+t pid, const char $\ast$cmd)
+\begin{DoxyCompactList}\small\item\em Print the completion of a background job to standard out. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_ab7cc05f9004354092c64727e7ab9546b}{run\+\_\+generic} (\hyperlink{structGenericCommand}{Generic\+Command} cmd)
+\begin{DoxyCompactList}\small\item\em Run a generic (non-\/builtin) command. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_a550f8e50935c3911e6926f14e27ba2eb}{run\+\_\+echo} (\hyperlink{command_8h_a8dc22d719c880c1ffcd9bc2dc5773633}{Echo\+Command} cmd)
+\begin{DoxyCompactList}\small\item\em Run the builtin echo command. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_af5fe54ac25f6dbb4e5a7bb7cde156413}{run\+\_\+export} (\hyperlink{structExportCommand}{Export\+Command} cmd)
+\begin{DoxyCompactList}\small\item\em Run the builtin export command. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_a8e9aed155e5ccf7e207a8f3ce4789d83}{run\+\_\+cd} (\hyperlink{structCDCommand}{C\+D\+Command} cmd)
+\begin{DoxyCompactList}\small\item\em Run the builtin cd (change directory) command. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_a2b6a997c9f75fd29fd6e103498ceaaec}{run\+\_\+kill} (\hyperlink{structKillCommand}{Kill\+Command} cmd)
+\begin{DoxyCompactList}\small\item\em Run the builtin kill command. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_a934397f142ab2b63f69628a9db231bac}{run\+\_\+pwd} ()
+\begin{DoxyCompactList}\small\item\em Run the builtin pwd (print working directory) command. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_ae954ca554a8f66899f270560d68ec012}{run\+\_\+jobs} ()
+\begin{DoxyCompactList}\small\item\em Run the builtin jobs command to show the jobs list. \end{DoxyCompactList}\item 
+void \hyperlink{execute_8h_a4dab67459028f3b5a60d1a3695933f4b}{run\+\_\+script} (\hyperlink{structCommandHolder}{Command\+Holder} $\ast$holders)
+\begin{DoxyCompactList}\small\item\em Common entry point for all commands. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions for interpreting and running commands. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{execute_8h_acd83b7572960ddecb86a6f96d82fa040}\label{execute_8h_acd83b7572960ddecb86a6f96d82fa040}} 
+\index{execute.\+h@{execute.\+h}!get\+\_\+current\+\_\+directory@{get\+\_\+current\+\_\+directory}}
+\index{get\+\_\+current\+\_\+directory@{get\+\_\+current\+\_\+directory}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+current\+\_\+directory()}{get\_current\_directory()}}
+{\footnotesize\ttfamily char$\ast$ get\+\_\+current\+\_\+directory (\begin{DoxyParamCaption}\item[{bool $\ast$}]{should\+\_\+free }\end{DoxyParamCaption})}
+
+
+
+Get the real current working directory. 
+
+This is not necessarily the same as the P\+WD environment variable and setting P\+WD does not actually change the current working directory.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em should\+\_\+free} & Set this to true if the returned string should be free\textquotesingle{}d by the caller and false otherwise.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A string representing the current working directory 
+\end{DoxyReturn}
+\mbox{\Hypertarget{execute_8h_afeab372587374ba444aa9bdfb6cfa0d8}\label{execute_8h_afeab372587374ba444aa9bdfb6cfa0d8}} 
+\index{execute.\+h@{execute.\+h}!lookup\+\_\+env@{lookup\+\_\+env}}
+\index{lookup\+\_\+env@{lookup\+\_\+env}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{lookup\+\_\+env()}{lookup\_env()}}
+{\footnotesize\ttfamily const char$\ast$ lookup\+\_\+env (\begin{DoxyParamCaption}\item[{const char $\ast$}]{env\+\_\+var }\end{DoxyParamCaption})}
+
+
+
+Function to get environment variable values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env\+\_\+var} & Environment variable to lookup\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String containing the value of the environment variable env\+\_\+var 
+\end{DoxyReturn}
+\mbox{\Hypertarget{execute_8h_a0b272e2a39868632c7cdf1f66abca817}\label{execute_8h_a0b272e2a39868632c7cdf1f66abca817}} 
+\index{execute.\+h@{execute.\+h}!print\+\_\+job@{print\+\_\+job}}
+\index{print\+\_\+job@{print\+\_\+job}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+job()}{print\_job()}}
+{\footnotesize\ttfamily void print\+\_\+job (\begin{DoxyParamCaption}\item[{int}]{job\+\_\+id,  }\item[{pid\+\_\+t}]{pid,  }\item[{const char $\ast$}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Print a job to standard out. 
+
+We use the minimum of what a Job structure should contain to pass to this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em job\+\_\+id} & Job identifier number.\\
+\hline
+{\em pid} & Process id of a process belonging to this job.\\
+\hline
+{\em cmd} & String holding an approximation of what the user typed in for the command. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{execute_8h_a9fbab67c786201a8f3266661bd0917c5}\label{execute_8h_a9fbab67c786201a8f3266661bd0917c5}} 
+\index{execute.\+h@{execute.\+h}!print\+\_\+job\+\_\+bg\+\_\+complete@{print\+\_\+job\+\_\+bg\+\_\+complete}}
+\index{print\+\_\+job\+\_\+bg\+\_\+complete@{print\+\_\+job\+\_\+bg\+\_\+complete}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+job\+\_\+bg\+\_\+complete()}{print\_job\_bg\_complete()}}
+{\footnotesize\ttfamily void print\+\_\+job\+\_\+bg\+\_\+complete (\begin{DoxyParamCaption}\item[{int}]{job\+\_\+id,  }\item[{pid\+\_\+t}]{pid,  }\item[{const char $\ast$}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Print the completion of a background job to standard out. 
+
+We use the minimum of what a Job should contain to pass to this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em job\+\_\+id} & Job identifier number.\\
+\hline
+{\em pid} & Process id of a process belonging to this job.\\
+\hline
+{\em cmd} & String holding an aproximation of what the user typed in for the command. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{execute_8h_ae6dddf9eadf2166be12825dd40dbd644}\label{execute_8h_ae6dddf9eadf2166be12825dd40dbd644}} 
+\index{execute.\+h@{execute.\+h}!print\+\_\+job\+\_\+bg\+\_\+start@{print\+\_\+job\+\_\+bg\+\_\+start}}
+\index{print\+\_\+job\+\_\+bg\+\_\+start@{print\+\_\+job\+\_\+bg\+\_\+start}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+job\+\_\+bg\+\_\+start()}{print\_job\_bg\_start()}}
+{\footnotesize\ttfamily void print\+\_\+job\+\_\+bg\+\_\+start (\begin{DoxyParamCaption}\item[{int}]{job\+\_\+id,  }\item[{pid\+\_\+t}]{pid,  }\item[{const char $\ast$}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Print the start up of a background job to standard out. 
+
+We use the minimum of what a Job should contain to pass to this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em job\+\_\+id} & Job identifier number.\\
+\hline
+{\em pid} & Process id of a process belonging to this job.\\
+\hline
+{\em cmd} & String holding an aproximation of what the user typed in for the command. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{execute_8h_a8e9aed155e5ccf7e207a8f3ce4789d83}\label{execute_8h_a8e9aed155e5ccf7e207a8f3ce4789d83}} 
+\index{execute.\+h@{execute.\+h}!run\+\_\+cd@{run\+\_\+cd}}
+\index{run\+\_\+cd@{run\+\_\+cd}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{run\+\_\+cd()}{run\_cd()}}
+{\footnotesize\ttfamily void run\+\_\+cd (\begin{DoxyParamCaption}\item[{\hyperlink{structCDCommand}{C\+D\+Command}}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Run the builtin cd (change directory) command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & An {\itshape \hyperlink{structCDCommand}{C\+D\+Command}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structCDCommand}{C\+D\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{execute_8h_a550f8e50935c3911e6926f14e27ba2eb}\label{execute_8h_a550f8e50935c3911e6926f14e27ba2eb}} 
+\index{execute.\+h@{execute.\+h}!run\+\_\+echo@{run\+\_\+echo}}
+\index{run\+\_\+echo@{run\+\_\+echo}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{run\+\_\+echo()}{run\_echo()}}
+{\footnotesize\ttfamily void run\+\_\+echo (\begin{DoxyParamCaption}\item[{\hyperlink{command_8h_a8dc22d719c880c1ffcd9bc2dc5773633}{Echo\+Command}}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Run the builtin echo command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & An {\itshape Echo\+Command} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_a8dc22d719c880c1ffcd9bc2dc5773633}{Echo\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{execute_8h_af5fe54ac25f6dbb4e5a7bb7cde156413}\label{execute_8h_af5fe54ac25f6dbb4e5a7bb7cde156413}} 
+\index{execute.\+h@{execute.\+h}!run\+\_\+export@{run\+\_\+export}}
+\index{run\+\_\+export@{run\+\_\+export}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{run\+\_\+export()}{run\_export()}}
+{\footnotesize\ttfamily void run\+\_\+export (\begin{DoxyParamCaption}\item[{\hyperlink{structExportCommand}{Export\+Command}}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Run the builtin export command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & An {\itshape \hyperlink{structExportCommand}{Export\+Command}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structExportCommand}{Export\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{execute_8h_ab7cc05f9004354092c64727e7ab9546b}\label{execute_8h_ab7cc05f9004354092c64727e7ab9546b}} 
+\index{execute.\+h@{execute.\+h}!run\+\_\+generic@{run\+\_\+generic}}
+\index{run\+\_\+generic@{run\+\_\+generic}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{run\+\_\+generic()}{run\_generic()}}
+{\footnotesize\ttfamily void run\+\_\+generic (\begin{DoxyParamCaption}\item[{\hyperlink{structGenericCommand}{Generic\+Command}}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Run a generic (non-\/builtin) command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & A {\itshape \hyperlink{structGenericCommand}{Generic\+Command}} command\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structGenericCommand}{Generic\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{execute_8h_ae954ca554a8f66899f270560d68ec012}\label{execute_8h_ae954ca554a8f66899f270560d68ec012}} 
+\index{execute.\+h@{execute.\+h}!run\+\_\+jobs@{run\+\_\+jobs}}
+\index{run\+\_\+jobs@{run\+\_\+jobs}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{run\+\_\+jobs()}{run\_jobs()}}
+{\footnotesize\ttfamily void run\+\_\+jobs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Run the builtin jobs command to show the jobs list. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_a0c0e44e3e2b07b1e9b48023205cb4ca2}{P\+W\+D\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{execute_8h_a2b6a997c9f75fd29fd6e103498ceaaec}\label{execute_8h_a2b6a997c9f75fd29fd6e103498ceaaec}} 
+\index{execute.\+h@{execute.\+h}!run\+\_\+kill@{run\+\_\+kill}}
+\index{run\+\_\+kill@{run\+\_\+kill}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{run\+\_\+kill()}{run\_kill()}}
+{\footnotesize\ttfamily void run\+\_\+kill (\begin{DoxyParamCaption}\item[{\hyperlink{structKillCommand}{Kill\+Command}}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Run the builtin kill command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & A {\itshape \hyperlink{structKillCommand}{Kill\+Command}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structKillCommand}{Kill\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{execute_8h_a934397f142ab2b63f69628a9db231bac}\label{execute_8h_a934397f142ab2b63f69628a9db231bac}} 
+\index{execute.\+h@{execute.\+h}!run\+\_\+pwd@{run\+\_\+pwd}}
+\index{run\+\_\+pwd@{run\+\_\+pwd}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{run\+\_\+pwd()}{run\_pwd()}}
+{\footnotesize\ttfamily void run\+\_\+pwd (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Run the builtin pwd (print working directory) command. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_a0c0e44e3e2b07b1e9b48023205cb4ca2}{P\+W\+D\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{execute_8h_a4dab67459028f3b5a60d1a3695933f4b}\label{execute_8h_a4dab67459028f3b5a60d1a3695933f4b}} 
+\index{execute.\+h@{execute.\+h}!run\+\_\+script@{run\+\_\+script}}
+\index{run\+\_\+script@{run\+\_\+script}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{run\+\_\+script()}{run\_script()}}
+{\footnotesize\ttfamily void run\+\_\+script (\begin{DoxyParamCaption}\item[{\hyperlink{structCommandHolder}{Command\+Holder} $\ast$}]{holders }\end{DoxyParamCaption})}
+
+
+
+Common entry point for all commands. 
+
+This function resolves the type of the command and calls the relevant run function
+
+
+\begin{DoxyParams}{Parameters}
+{\em holders} & An array of command holders\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{unionCommand}{Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{execute_8h_afa91981c1edd7bb1c86292d80b27e170}\label{execute_8h_afa91981c1edd7bb1c86292d80b27e170}} 
+\index{execute.\+h@{execute.\+h}!write\+\_\+env@{write\+\_\+env}}
+\index{write\+\_\+env@{write\+\_\+env}!execute.\+h@{execute.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+env()}{write\_env()}}
+{\footnotesize\ttfamily void write\+\_\+env (\begin{DoxyParamCaption}\item[{const char $\ast$}]{env\+\_\+var,  }\item[{const char $\ast$}]{val }\end{DoxyParamCaption})}
+
+
+
+Function to set and define environment variable values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env\+\_\+var} & Environment variable to set\\
+\hline
+{\em val} & String with the value to set the environment variable env\+\_\+var \\
+\hline
+\end{DoxyParams}

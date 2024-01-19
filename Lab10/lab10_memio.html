@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Lab 10 - Memory Mapped I/O</title>
+<style type="text/css">
+.auto-style1 {
+	font-size: xx-large;
+}
+.auto-style2 {
+	font-size: large;
+}
+</style>
+</head>
+
+<body title="Lab-11">
+
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style1">
+		<b style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: x-large; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: -webkit-left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(204, 204, 204);">
+		Lab 10: Memory Mapped I/O</b></td>
+	</tr>
+</table>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+In this lab, we will learn about techniques available to application programmers 
+for using logical address spaces that are not as widely known or used as they 
+probably should be.</p>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+Issues addressed by this lab include:</p>
+<ul style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+	<li>Understand the concept of Memory Mapped I/O</li>
+	<li>Understand the difference between accessing data in a file using<span class="Apple-converted-space">&nbsp;</span><strong>read/write</strong><span class="Apple-converted-space">&nbsp;</span>system 
+	calls and using Memory Mapping</li>
+</ul>
+<p>&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Lab Materials</strong></td>
+	</tr>
+</table>
+<ol>
+	<li><a href="MemoryMappedIO.pdf">Slides</a></li>
+	<li><a href="eecs678-mmio-lab.tar.gz">Lab Files</a></li><br/><br/>
+</ol>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Assignment</strong></td>
+	</tr>
+</table>
+
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+For this lab, you should complete the implementation of the<span class="Apple-converted-space">&nbsp;</span><em>memmap</em><span class="Apple-converted-space">&nbsp;</span>program. 
+This program should create a memory mapping of the source and destination files. 
+Copy the source file using memory operations and compare this approach to the<span class="Apple-converted-space">&nbsp;</span><strong>read/write</strong><span class="Apple-converted-space">&nbsp;</span>system 
+call approach taken by the<span class="Apple-converted-space">&nbsp;</span><em>read_write</em><span class="Apple-converted-space">&nbsp;</span>program. 
+Use the<span class="Apple-converted-space">&nbsp;</span><em>time</em><span class="Apple-converted-space">&nbsp;</span>command 
+in comparing the work done by the two approaches under different operating 
+conditions.</p>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+We should be able to build the your solution<span class="Apple-converted-space">&nbsp;</span><em>memmap</em><span class="Apple-converted-space">&nbsp;</span>program 
+using the Makefile submitted in your solution zip file.</p>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>When you are finished</strong></td>
+	</tr>
+</table>
+
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+Once you are done with the lab, compress your source code and submit the compressed file through Canvas.</p>
+<p>&nbsp;</p>
+<p><a href="../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Signals</title>
+<style type="text/css">
+.auto-style1 {
+	font-size: xx-large;
+}
+.auto-style2 {
+	font-size: large;
+}
+</style>
+</head>
+
+<body title="Lab 2 - POSIX Signals">
+
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style1">
+		<b style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: x-large; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: -webkit-left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(204, 204, 204);">
+		Lab 2: POSIX Signals</b></td>
+	</tr>
+</table>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+In this lab, we will learn about using POSIX (Unix) signals. The POSIX standard 
+for signals, as with most of its components was based on UNIX semantics, but 
+generalized to avoid explicitly endorsing one version of UNIX or another. The 
+POSIX standard for signals and other aspects of system support are often 
+supported by other operating systems. As with the other labs in this class we 
+will experiment with signals in the context of Linux. We will also construct a 
+small program which associates signal handlers with a few signals to give more 
+interesting functionality to the starter code provided.</p>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+In this lab we will ensure you see how signals are used by BASH to support job 
+control, which is an interesting feature, if slightly less widely used than it 
+was a number of years ago. We will also look at a simple user program and change 
+it in ways demonstrating:</p>
+<ul style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+	<li>Definition of signal handlers</li>
+	<li>Association of handlers and signals</li>
+	<li>Use of system calls related to signals: alarm(), pause()</li>
+</ul>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+</p>
+<p>&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Lab Materials</strong></td>
+	</tr>
+</table>
+<ol>
+	<li><a href="POSIXSignals.pdf">Slides</a></li>
+	<li><a href="eecs678-lab2-signals.tar">Lab Files</a></li>
+</ol>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Assignment</strong></td>
+	</tr>
+</table>
+
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+For this lab, you need to complete the implementation of the<span class="Apple-converted-space">&nbsp;</span><string>signals.c</string><span class="Apple-converted-space">&nbsp;</span>program. 
+This program should count the number of times the user has sent the SIGINT 
+signal to the running process. Pressing Ctl-C from the keyboard send this 
+signal. When the process receives the SIGTSTP signal (Ctl-Z), it should print to 
+the terminal the number of SIGINT signals it has received. After it receives 5 
+SIGINT signals, the program should prompt the user to exit. If the user does not 
+respond within 3 seconds, an SIGALRM signal should force the program to exit.</p>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+An example output of running signals is shown below:</p>
+<pre style="color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">	bash&gt; ./signals 
+	^C^C^C^C^C
+	Really exit? [Y/n]: n
+
+	Continuing
+	^C^C^C^Z
+
+	So far, '3' Ctl-C presses were counted
+
+	^C^Z
+
+	So far, '4' Ctl-C presses were counted
+
+	^C
+	Really exit? [Y/n]: n
+
+	Continuing
+	^C^C^C^C^C
+	Really exit? [Y/n]: 
+	User taking too long to respond. Exiting  . . .</pre>
+<p>&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>When you're finished</strong></td>
+	</tr>
+</table>
+
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+Code submission will be through Canvas. You also need to tar up your lab for submission. For this step, you should use 
+the 'zip' target included in the lab's Makefile. Change the STUDENT_ID variable 
+in the Makefile to your student ID and type:</span><pre style="color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">    make zip</pre>
+<p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+</p>
+
+<p>&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Evaluation</strong></td>
+	</tr>
+</table>
+<p>&nbsp;</p>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+The total marks for this lab will be awarded based on the submission of your code and your quiz answers. 
+</span>
+<ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+	<li>STEP 1 (Defining alarm handler) (20 points)</li>
+	<li>STEP 2 (Clearing sa memory) (10 points) </li>
+	<li>STEP 3 (Setting up mask set) (10 points) </li>
+	<li>STEP 4 (Unblocking SIGALRM) (10 points) </li>
+	<li>STEP 5 (Setting up SIGINT, SIGTSTP, and SIGALRM signal handlers) (20 points) </li>
+	<li>STEP 6 (Ensuring program keeps running) (10 points) </li>
+</br>
+	<li>10% (Quiz) - A short quiz about signals will be open on the following week during the lab hours  </li>
+	<li>10% (Demo) - A quick demo of your submission will be taken on the following week during the lab hours </li>	
+</ol>
+<p><a href="../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>

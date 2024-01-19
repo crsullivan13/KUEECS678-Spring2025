@@ -1,0 +1,79 @@
+\hypertarget{buddy_8h}{}\doxysection{buddy.\+h File Reference}
+\label{buddy_8h}\index{buddy.h@{buddy.h}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{buddy_8h_a6674e7c974485f8a5dd8874e9eb125f3}{buddy\+\_\+init}} ()
+\item 
+void $\ast$ \mbox{\hyperlink{buddy_8h_a8197baf99e89c859b5326a1d455680fd}{buddy\+\_\+alloc}} (int size)
+\item 
+void \mbox{\hyperlink{buddy_8h_a961ef8a2fd9df43d50945100f172b97a}{buddy\+\_\+free}} (void $\ast$addr)
+\item 
+void \mbox{\hyperlink{buddy_8h_aa16d99b90dd0a6b9d7e3db0573620c21}{buddy\+\_\+dump}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{buddy_8h_a8197baf99e89c859b5326a1d455680fd}\label{buddy_8h_a8197baf99e89c859b5326a1d455680fd}} 
+\index{buddy.h@{buddy.h}!buddy\_alloc@{buddy\_alloc}}
+\index{buddy\_alloc@{buddy\_alloc}!buddy.h@{buddy.h}}
+\doxysubsubsection{\texorpdfstring{buddy\_alloc()}{buddy\_alloc()}}
+{\footnotesize\ttfamily void$\ast$ buddy\+\_\+alloc (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+Allocate a memory block.
+
+On a memory request, the allocator returns the head of a free-\/list of the matching size (i.\+e., smallest block that satisfies the request). If the free-\/list of the matching block size is empty, then a larger block size will be selected. The selected (large) block is then splitted into two smaller blocks. Among the two blocks, left block will be used for allocation or be further splitted while the right block will be added to the appropriate free-\/list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & size in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+memory block address 
+\end{DoxyReturn}
+
+
+Definition at line 110 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8h_aa16d99b90dd0a6b9d7e3db0573620c21}\label{buddy_8h_aa16d99b90dd0a6b9d7e3db0573620c21}} 
+\index{buddy.h@{buddy.h}!buddy\_dump@{buddy\_dump}}
+\index{buddy\_dump@{buddy\_dump}!buddy.h@{buddy.h}}
+\doxysubsubsection{\texorpdfstring{buddy\_dump()}{buddy\_dump()}}
+{\footnotesize\ttfamily void buddy\+\_\+dump (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Print the buddy system status---order oriented
+
+print free pages in each order. 
+
+Definition at line 135 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8h_a961ef8a2fd9df43d50945100f172b97a}\label{buddy_8h_a961ef8a2fd9df43d50945100f172b97a}} 
+\index{buddy.h@{buddy.h}!buddy\_free@{buddy\_free}}
+\index{buddy\_free@{buddy\_free}!buddy.h@{buddy.h}}
+\doxysubsubsection{\texorpdfstring{buddy\_free()}{buddy\_free()}}
+{\footnotesize\ttfamily void buddy\+\_\+free (\begin{DoxyParamCaption}\item[{void $\ast$}]{addr }\end{DoxyParamCaption})}
+
+Free an allocated memory block.
+
+Whenever a block is freed, the allocator checks its buddy. If the buddy is free as well, then the two buddies are combined to form a bigger block. This process continues until one of the buddies is not free.
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & memory block address to be freed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 125 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8h_a6674e7c974485f8a5dd8874e9eb125f3}\label{buddy_8h_a6674e7c974485f8a5dd8874e9eb125f3}} 
+\index{buddy.h@{buddy.h}!buddy\_init@{buddy\_init}}
+\index{buddy\_init@{buddy\_init}!buddy.h@{buddy.h}}
+\doxysubsubsection{\texorpdfstring{buddy\_init()}{buddy\_init()}}
+{\footnotesize\ttfamily void buddy\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Initialize the buddy system 
+
+Definition at line 79 of file buddy.\+c.
+

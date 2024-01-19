@@ -1,0 +1,1 @@
+find $SANDBOX_DIR -type f -name '*'.txt | grep valgrind

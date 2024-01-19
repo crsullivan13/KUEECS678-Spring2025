@@ -1,0 +1,55 @@
+\hypertarget{debug_8h}{}\section{src/debug.h File Reference}
+\label{debug_8h}\index{src/debug.\+h@{src/debug.\+h}}
+
+
+This file holds useful macros for debugging purposes.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{debug_8h_a035cb3bcb57e0682ea2b55c645e5f9f2}{P\+R\+I\+N\+T\+\_\+\+D\+E\+B\+UG}(fmt, ...)
+\begin{DoxyCompactList}\small\item\em Print statement that only triggers if D\+E\+B\+UG is defined. \end{DoxyCompactList}\item 
+\#define \hyperlink{debug_8h_abcf0d5a50dd7e407cd464c1afbd27554}{I\+F\+D\+E\+B\+UG}(x)
+\begin{DoxyCompactList}\small\item\em Insert code that is only compiled if D\+E\+B\+UG is defined. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file holds useful macros for debugging purposes. 
+
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{debug_8h_abcf0d5a50dd7e407cd464c1afbd27554}\label{debug_8h_abcf0d5a50dd7e407cd464c1afbd27554}} 
+\index{debug.\+h@{debug.\+h}!I\+F\+D\+E\+B\+UG@{I\+F\+D\+E\+B\+UG}}
+\index{I\+F\+D\+E\+B\+UG@{I\+F\+D\+E\+B\+UG}!debug.\+h@{debug.\+h}}
+\subsubsection{\texorpdfstring{I\+F\+D\+E\+B\+UG}{IFDEBUG}}
+{\footnotesize\ttfamily \#define I\+F\+D\+E\+B\+UG(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+
+
+Insert code that is only compiled if D\+E\+B\+UG is defined. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Code to insert \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{debug_8h_a035cb3bcb57e0682ea2b55c645e5f9f2}\label{debug_8h_a035cb3bcb57e0682ea2b55c645e5f9f2}} 
+\index{debug.\+h@{debug.\+h}!P\+R\+I\+N\+T\+\_\+\+D\+E\+B\+UG@{P\+R\+I\+N\+T\+\_\+\+D\+E\+B\+UG}}
+\index{P\+R\+I\+N\+T\+\_\+\+D\+E\+B\+UG@{P\+R\+I\+N\+T\+\_\+\+D\+E\+B\+UG}!debug.\+h@{debug.\+h}}
+\subsubsection{\texorpdfstring{P\+R\+I\+N\+T\+\_\+\+D\+E\+B\+UG}{PRINT\_DEBUG}}
+{\footnotesize\ttfamily \#define P\+R\+I\+N\+T\+\_\+\+D\+E\+B\+UG(\begin{DoxyParamCaption}\item[{}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Print statement that only triggers if D\+E\+B\+UG is defined. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fmt} & Format for the fprintf statement. This format is appended to the information refering to the location in the code the macro is expanded at.\\
+\hline
+{\em ...} & Arguments to be substituted into the format string \\
+\hline
+\end{DoxyParams}

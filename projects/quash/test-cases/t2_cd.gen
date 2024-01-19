@@ -1,0 +1,5 @@
+dir3-1
+dir3-2
+valgrind_expected.txt
+$SANDBOX_DIR/dir3
+$SANDBOX_DIR/dir3

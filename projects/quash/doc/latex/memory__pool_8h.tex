@@ -1,0 +1,82 @@
+\hypertarget{memory__pool_8h}{}\section{src/parsing/memory\+\_\+pool.h File Reference}
+\label{memory__pool_8h}\index{src/parsing/memory\+\_\+pool.\+h@{src/parsing/memory\+\_\+pool.\+h}}
+
+
+An abstraction of malloc that allows for all allocations in the pool to be free\textquotesingle{}d with a single call to \hyperlink{memory__pool_8h_a2a8f807565226a955c94a2c4670ba65f}{destroy\+\_\+memory\+\_\+pool()}. Allocations to the memory pool should N\+OT be manually free\textquotesingle{}d with a call to free().  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{memory__pool_8h_a1ad04a8d891de237fc5d91191c569777}{initialize\+\_\+memory\+\_\+pool} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Allocate the memory pool. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{memory__pool_8h_a609473bc6afff33d360a8e0c8935812e}{memory\+\_\+pool\+\_\+alloc} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Reserve some space in the memory pool and returns a unique address that can be written to and read from. This can be thought of exactly like malloc() without the requirement of calling free() directly on the returned pointer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory__pool_8h_a2a8f807565226a955c94a2c4670ba65f}\label{memory__pool_8h_a2a8f807565226a955c94a2c4670ba65f}} 
+void \hyperlink{memory__pool_8h_a2a8f807565226a955c94a2c4670ba65f}{destroy\+\_\+memory\+\_\+pool} ()
+\begin{DoxyCompactList}\small\item\em Free all memory allocated in the memory pool. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{memory__pool_8h_a7d92ccd7e51eb71624f07b4e917869aa}{memory\+\_\+pool\+\_\+strdup} (const char $\ast$str)
+\begin{DoxyCompactList}\small\item\em A version of strdup() that allocates the duplicate to the memory pool rather than with malloc directly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An abstraction of malloc that allows for all allocations in the pool to be free\textquotesingle{}d with a single call to \hyperlink{memory__pool_8h_a2a8f807565226a955c94a2c4670ba65f}{destroy\+\_\+memory\+\_\+pool()}. Allocations to the memory pool should N\+OT be manually free\textquotesingle{}d with a call to free(). 
+
+\begin{DoxyWarning}{Warning}
+The memory pool allocations are not thread safe 
+\end{DoxyWarning}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{memory__pool_8h_a1ad04a8d891de237fc5d91191c569777}\label{memory__pool_8h_a1ad04a8d891de237fc5d91191c569777}} 
+\index{memory\+\_\+pool.\+h@{memory\+\_\+pool.\+h}!initialize\+\_\+memory\+\_\+pool@{initialize\+\_\+memory\+\_\+pool}}
+\index{initialize\+\_\+memory\+\_\+pool@{initialize\+\_\+memory\+\_\+pool}!memory\+\_\+pool.\+h@{memory\+\_\+pool.\+h}}
+\subsubsection{\texorpdfstring{initialize\+\_\+memory\+\_\+pool()}{initialize\_memory\_pool()}}
+{\footnotesize\ttfamily void initialize\+\_\+memory\+\_\+pool (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Allocate the memory pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The initial size of the memory pool. If this value is zero then a default size of one is used. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{memory__pool_8h_a609473bc6afff33d360a8e0c8935812e}\label{memory__pool_8h_a609473bc6afff33d360a8e0c8935812e}} 
+\index{memory\+\_\+pool.\+h@{memory\+\_\+pool.\+h}!memory\+\_\+pool\+\_\+alloc@{memory\+\_\+pool\+\_\+alloc}}
+\index{memory\+\_\+pool\+\_\+alloc@{memory\+\_\+pool\+\_\+alloc}!memory\+\_\+pool.\+h@{memory\+\_\+pool.\+h}}
+\subsubsection{\texorpdfstring{memory\+\_\+pool\+\_\+alloc()}{memory\_pool\_alloc()}}
+{\footnotesize\ttfamily void$\ast$ memory\+\_\+pool\+\_\+alloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Reserve some space in the memory pool and returns a unique address that can be written to and read from. This can be thought of exactly like malloc() without the requirement of calling free() directly on the returned pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & Size in bytes of the requested reserved space\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to a unique array of size bytes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{memory__pool_8h_a7d92ccd7e51eb71624f07b4e917869aa}\label{memory__pool_8h_a7d92ccd7e51eb71624f07b4e917869aa}} 
+\index{memory\+\_\+pool.\+h@{memory\+\_\+pool.\+h}!memory\+\_\+pool\+\_\+strdup@{memory\+\_\+pool\+\_\+strdup}}
+\index{memory\+\_\+pool\+\_\+strdup@{memory\+\_\+pool\+\_\+strdup}!memory\+\_\+pool.\+h@{memory\+\_\+pool.\+h}}
+\subsubsection{\texorpdfstring{memory\+\_\+pool\+\_\+strdup()}{memory\_pool\_strdup()}}
+{\footnotesize\ttfamily char$\ast$ memory\+\_\+pool\+\_\+strdup (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str }\end{DoxyParamCaption})}
+
+
+
+A version of strdup() that allocates the duplicate to the memory pool rather than with malloc directly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Pointer to the string to duplicate\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A copy of str allocated in the memory pool 
+\end{DoxyReturn}

@@ -1,0 +1,776 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Optional - Adding a System Call to a Linux Kernel</title>
+<style type="text/css">
+.auto-style1 {
+        font-size: xx-large;
+}
+.auto-style2 {
+        font-size: large;
+}
+.auto-style3 {
+        margin-top: 0;
+        margin-bottom: 0;
+}
+.auto-style5 {
+        margin-top: 0;
+        margin-bottom: 4px;
+}
+</style>
+</head>
+
+<body>
+
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style1">
+                <b style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: x-large; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: -webkit-left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(204, 204, 204);">
+                 Adding a System Call to a Linux Kernel</b></td>
+        </tr>
+</table>
+<p><font color="black" size="+1" style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <br/><br/>
+        In this lab, we will add a system call to the kernel source 
+        directory. Today you will create our own KVM image, create 
+        a user account on this image. Then, you will be modifying 
+        the kernel source directory by adding a new system call to 
+        the kernel. Then you will build and install the modified kernel 
+        on this image. Finally, we will test the system call.</p>
+<br />
+<h3 style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+Table of Contents:</h3>
+<ul>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style3">
+        <a href="#Installing QEMU">Installing QEMU</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style3">
+        <a href="#Creating image">Creating your image</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#Boot image">Boot your image</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#setup account">Setting up your account</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#System Call">Adding a System Call to the Linux Kernel</a>
+        </p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#Building kernel">Building and installing your kernel</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#Testing">Testing the System Call</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#Other command">Other important commands</a></p>
+        </li><br/>
+</ul>
+<p>&nbsp;</p>
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Resources"></a>Resources</strong></td>
+        </tr>
+</table>
+<p>
+        <ul>
+                <li>
+                        <a href="https://www.engadget.com/2012-07-10-vim-how-to.html">Using Vi/Vim Editor</a>
+                </li>
+                &nbsp;
+                <li>
+                        <a href="https://mediahub.ku.edu/media/Lab3/1_m49ka1fm">Video Discussion</a><br/><br/>
+                        <iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/368641/sp/36864100/embedIframeJs/uiconf_id/29817672/partner_id/368641?iframeembed=true&playerId=kaltura_player&entry_id=1_m49ka1fm&flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_qqsphnsj" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Kaltura Player"></iframe>
+                </li>
+        </ul>
+</p>
+<p>&nbsp;</p>
+<table style="width: 100%">
+        <tr></tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Installing QEMU"></a>Installing QEMU (No need for this step, if you already have QEMU functional from lab 2)</strong></td>
+        </tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+<p>For today's lab, you will be directly working on your machine. We won't be needing VirtualBox or PuTTY for today's lab. You can use the host OS of your machine. It can either be Linux, Windows or MacOS.</p>
+<ol>
+        <li>Now, go to <a href="https://www.qemu.org">QEMU's website (qemu.org)</a></li>
+        <li>Then, go to the <a href="https://www.qemu.org/download/">Downloads</a> page and follow the instructions for your specific Operating System. Download QEMU.</li>
+        <li>Open the downloaded QEMU installer and install QEMU.</li>
+        <li>Add the installed QEMU directory to your System's PATH environment variable.</li>
+</ol>
+<p>We will be using QEMU from the command prompt (Windows) or terminal (Linux, MacOS). The commands are the same for the different platforms.</p>
+
+<p>&nbsp;</p>
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Creating image"></a>Creating Your Image</strong></td>
+        </tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+<p>Like lab2, we will need a base image first. Then, we will create a differential image off the base image.</p>
+<ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
+        <li>
+                For the base image, we have two options:<br/><br/>
+                <ul>
+                        <li>
+                                You can either use the base image that you had copied from the cycle servers during lab2.
+                        </li>
+                        &nbsp;
+                        <li>
+                                Or, you can fetch the base image from the cycle servers using the following command:
+                                <pre style="margin-left: 40px;">scp your_ku_online_id@cycle1.eecs.ku.edu:/srv/EECS_678/eecs678_base.qcow .</pre>
+                        </li>
+                </ul>
+        </li>
+        &nbsp;
+        <li>
+                Open up either the command prompt (on Windows) or terminal (on Linux, MacOS). Navigate to the directory where you have stored the based image.                
+        </li>
+        &nbsp;
+        <li>
+                Then, create a differential image off this local copy of the base image. Even though we have already created a differential image for lab2,
+                we will need a new differential image. The command is:
+                <br/><br/><b>&gt; qemu-img create -f qcow2 -b [base_image] [diff_image]<span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
+                This example creates a differential image named 'your_first_name.qcow':
+                <pre style="margin-left: 40px;">qemu-img create -f qcow2 -b eecs678_base.qcow your_first_name.qcow</pre>
+                <font style="color: red;">(Screenshot)</font>
+        </li>
+</ol>
+<p>&nbsp;</p>
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong><a name="Boot image">
+                </a>Boot Your Image</strong></td>
+        </tr>
+</table>
+
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+You will do this much more often. There are several options for booting into
+your image.</span><ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li>The basic command for booting into your image is:<br />
+        <br />
+        <b>&gt; qemu-system-x86_64 -hda [boot-img] -m [mem]<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        This example boots into the image 'your_first_name.qcow' and simulates it on a
+        machine with 2048M of memory:
+        <pre style="margin-left: 40px;">qemu-system-x86_64 -hda your_first_name.qcow -smp 2 -m 2048M</pre>
+        <font style="color: red;">(Screenshot)</font>
+        <p>Here, -smp value denotes the number of cores and -m value denotes the amount of RAM we want to allocate to the QEMU system.
+        This will depend on how many cores and how much memory, you are willing to share from your physical machine with the QEMU system.                
+        </p>
+        </li>
+</ol>
+<p>&nbsp;</p>
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="setup account"></a>Setting up Your
+                Account</strong></td>
+        </tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+Boot into your image as the root user. Your image comes with Debian 6.0
+pre-installed. Most software you will need is already installed.<span class="Apple-converted-space">&nbsp;</span></span><a href="#Other command" style="font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+last section in this guide</a><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>describes
+how to install new software on your KVM. The source code of the kernel we will
+use is stored on your image in<span class="Apple-converted-space">&nbsp;</span></span><font face="arial" style="color: rgb(0, 0, 0); font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">/kernel-src</font><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>and
+the config file we will use is in<span class="Apple-converted-space">&nbsp;</span></span><font face="arial" style="color: rgb(0, 0, 0); font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">/configs</font><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">.
+We need to do a little more setup before we build our kernel.</span><ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
+        <li>Create a user account for yourself:<br />
+        <br />
+        <b>&gt; adduser [username]<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        This example creates an account for user 'your_first_name'. After you have given the
+        user a password, you can ignore adding the other information:
+        <pre style="margin-left: 40px;">root@debian:~# adduser your_first_name
+Adding user `your_first_name' ...
+Adding new group `your_first_name' (1000) ...
+Adding new user `your_first_name' (1000) with group `your_first_name' ...
+Creating home directory `/home/your_first_name' ...
+Copying files from `/etc/skel' ...
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+Changing the user information for your_first_name
+Enter the new value, or press ENTER for the default
+        Full Name []: 
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n]
+root@debian:~#
+</pre>
+<font style="color: red;">(Screenshot)</font>
+        <br />
+        &nbsp;
+        </li>
+        <li>Add your new user to the sudoers file:<pre style="margin-left: 40px;">root@debian:~# vi /etc/sudoers
+  </pre>
+        This will open<span class="Apple-converted-space">&nbsp;</span><font face="arial">vi</font><span class="Apple-converted-space">&nbsp;</span>on<span class="Apple-converted-space">&nbsp;</span><font face="arial">/etc/sudoers</font>.
+        Add your new user to this file as shown:<pre style="margin-left: 40px;"># User privilege specification
+root ALL=(ALL) ALL
+your_first_name ALL=(ALL) ALL
+</pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br />
+        &nbsp;
+        <li>
+                It may also be helpful to add yourself to the sudo group:
+                <pre style="margin-left: 40px;">root@debian:~# usermod -a -G sudo your_first_name</pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br />
+        &nbsp;
+        <li>Next we want to move the kernel source (which we have created a folder for you) and the config file (which we have also moved to .config for you)  to the user's
+        home directory and change ownership to the user:
+        <pre style="margin-left: 40px;">root@debian:~# mkdir /home/your_first_name/kernel
+root@debian:~# mv ~/linux-2.6.32.60 /home/your_first_name/kernel/
+root@debian:~# chown -R your_first_name:your_first_name /home/your_first_name/kernel
+        </pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br />
+        &nbsp;
+	<li>We now need to install sudo on the kernel so the user can call commands with the rights sudo grants.
+	<pre style="margin-left: 40px;"> root@debian:~# apt-get install sudo </pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br />
+        &nbsp;
+        <li>Optionally, you can copy the .vimrc from /root to your user's home
+        directory (and change ownership to your user):<pre style="margin-left: 40px;">root@debian:~# cp /root/.vimrc /home/your_first_name/
+root@debian:~# chown your_first_name:your_first_name /home/your_first_name/.vimrc
+  </pre>
+        </li>
+        <font style="color: red;">(No Screenshot needed)</font>
+        <br />
+        &nbsp;
+        <li>Finally, switch user to the new user you have just created:<pre style="margin-left: 40px;">root@debian:~# su your_first_name</pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br/>
+        &nbsp;
+        <li>
+            At some point, during the installation, you might get the following error:<br/><pre>error: zlib.h: No such file or directory</pre><br/>
+            In order to avoid this error, please install the libz now using the following command:<br/>
+            <pre style="margin-left: 40px;">sudo apt-get install libz-dev</pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br/>
+        &nbsp;
+</ol>
+
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2">
+                <strong>
+                        <a name="System Call"></a>Adding a System Call to the Linux Kernel
+                </strong>
+                </td>
+        </tr>
+        </table>
+        <span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+        To add a system call to the kernel source directory carry out the following steps:
+        </span>
+        <ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
+        <li>
+                Go to your home directory using the following command: 
+                <pre style="margin-left: 40px;">cd</pre>
+        </li>
+        <br />
+        <li>
+                You should have a directory named "linux-2.6.32.60" in your 
+                "/home/&ltyour_first_name&gt/kernel/". Go into the directory "linux-2.6.32.60" using: <pre style="margin-left: 40px;">cd /home/&ltuser&gt/kernel/linux-2.6.32.60</pre>
+                <font style="color: red;">(Screenshot)</font>
+        </li>
+        <br />
+        <li>
+                Create a directory named "hello" and create a c program called "hello.c" inside the directory. This "hello.c" will be the definition of the system call. Do the following:
+
+                <pre style="margin-left: 40px;">mkdir hello<br />cd hello<br />vi hello.c</pre>
+                <font style="color: red;">(Screenshot)</font>
+
+                <p>The hello.c program should contain the following:</p>
+                <div id="hello" style="margin-left: 40px;">
+                <br />#include &ltlinux/kernel.h&gt<br /><br />
+
+                asmlinkage long sys_hello(void)<br />
+                {<br />
+                <div style="margin-left: 40px;">
+                        printk("Hello world\n");<br />
+                        return 100;<br />
+                </div>
+                }<br />
+                </div><br/>
+                <font style="color: red;">(Screenshot)</font>
+                <p><br /><b>asmlinkage</b> -- Tells the gcc compiler that the function should expect all its arguments on the "stack", and not in registers. On 32-bit Linux systems, system calls can have 4 arguments (in addition to the syscall number) that are passed on the stack. Of course, this "asmlinkage" macro is not necessary for our "hello" syscall, since it does not take any argument.<br />
+                <b>printk</b> -- function to print messages used exclusively for the Linux Kernel. Mostly used for logging messages from the kernel.</p>
+        </li>
+        <br />
+        <li>
+                Exit the hello.c source file and create another file called "Makefile" in the "hello" directory, using the following:
+
+                <pre style="margin-left: 40px;">vi Makefile</pre>
+                <font style="color: red;">(Screenshot)</font>
+
+                <p>The Makefile should contain the following:</p>
+
+                <div style="margin-left: 40px;">
+                obj-y := hello.o
+                </div><br/>
+                <font style="color: red;">(Screenshot)</font>
+        </li>
+
+        <br />
+        <li>
+                Go back to the "linux-2.6.32.60" directory using <pre style="margin-left: 40px;">cd ..</pre>
+
+                Now edit the existing Makefile in the "linux-2.6.32.60" directory, using <pre style="margin-left: 40px;">vi Makefile</pre>
+
+                Once you are inside the Makefile, search for "core-y". In Vim/Vi, you can search this by going to the command mode by pressing "Esc" and executing the command /core-y. You can press "n" to go to the next instance of core-y. You should be able to find an instance which looks like the following:
+
+                <br /><div style="margin-left: 40px;">
+                <br />core-y += kernel/ mm/ fs/ ipc/ security/ crypto/ block/
+                </div>
+                <p>Sometimes, after vi has found your desired search term,
+                it might highlight the term (in this case, core-y) in black.
+                As a result, it might apparently seem that the term core-y is
+                invisible whereas, it has only been highlighted with the same black
+                color as that of the background. So, try to manually look at the found
+                line and check whether it contains the text starting from += upto block/.
+                </p>
+
+                <br />Now add "hello/" at the end of this line. You should ensure that there is a space between "block/" and "hello/". The line should look like this:
+
+                <br /><div style="margin-left: 40px;">
+                <br />core-y += kernel/ mm/ fs/ ipc/ security/ crypto/ block/ hello/
+                </div><br/>
+                <font style="color: red;">(Screenshot)</font>
+                <p>These are the directories that will be recursively visited
+                during the kernel compilation to look for source files that need
+                to be compiled according to the individual Makefile in those directories.
+                </p>
+        </li>
+
+        <br />
+        <li>
+                While you are in the "linux-2.6.32.60" directory, go to the directory "arch/x86/kernel/" using <pre style="margin-left: 40px;">cd arch/x86/kernel/</pre>
+
+                Open the file named "syscall_table_32.S" using <pre style="margin-left: 40px;">vi syscall_table_32.S</pre>
+
+                To add our system call's entry into the system call table, edit the file "syscall_table_32.S" by adding the following at the end of this file:
+
+                <div style="margin-left: 40px;">
+                <br />.long sys_hello
+                </div><br/>
+                <font style="color: red;">(Screenshot)</font>
+        </li>
+
+        <br />
+        <li>
+                <a name="syscall_num">
+                Go back to the "arch/x86" directory by using
+                <pre style="margin-left: 40px;">cd ..</pre>
+
+                Then, go to the "include/asm" directory by doing 
+                <pre style="margin-left: 40px;">cd include/asm</pre>
+
+                Then, open the file named "unistd_32.h" using 
+                <pre style="margin-left: 40px;">vi unistd_32.h</pre>
+
+                Now, look for the line <i>#define __NR_sched_other_rr_getquantum</i> using the following in vi command mode:
+                <pre style="margin-left: 40px;">/#define __NR_sched_other_rr_getquantum</pre>
+
+                Once you have found this line, go into the vi insert mode 
+                by pressing "i" and after the line <br/>
+                <i>"#define __NR_sched_other_rr_getquantum"</i>, add the following line :
+
+                <div style="margin-left: 40px;">
+                        <br />#define __NR_hello 338
+                </div>
+                
+                <p>Before adding __NR_hello, the last system call entry was
+                 __NR_sched_other_rr_getquatum with the value 337. 
+                 We add 1 to it and get the __NR_hello entry with 338.</p>
+
+                <p>Also, increment the existing NR_syscalls value by 1. 
+                So, NR_syscalls should be 339<br/>
+                <div style="margin-left: 40px;">
+                        #define NR_syscalls 339
+                </div><br/>
+                <font style="color: red;">(Screenshot)</font>
+                </p>
+        </li>
+
+        <br />
+        <li>
+                Go back to the "linux-2.6.32.60" directory using <pre style="margin-left: 40px;">cd ../../../..</pre>
+
+                Then, go to the "include/linux" directory using <pre style="margin-left: 40px;">cd include/linux</pre>
+
+                Open the file named "syscalls.h" and add the declaration for our system call, at the end of the file. <pre style="margin-left: 40px;">vi syscalls.h</pre>
+
+                <p>Then, add the following:<br/>
+
+                <div style="margin-left: 40px;">
+                asmlinkage long sys_hello(void);
+                </div><br/>
+                <font style="color: red;">(Screenshot)</font>
+                </p>
+        </li>
+        </ol>
+
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Building kernel"></a>Building and
+                Installing Your Kernel</strong></td>
+        </tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+Building and installing the kernel on our Debian system is easy. Follow these
+simple instructions:</span><ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
+        <li>
+                We will use the kvm-kernel-build script to build our kernel. <font face="arial">kvm-kernel-build</font><span class="Apple-converted-space">&nbsp;</span>is
+                actually a script. It's contents are shown below:<pre style="margin-left: 40px;">#!/bin/sh
+rev=$1
+if [ -z "$rev" ]; then
+        echo "Usage: build64 
+        <revision>"
+        exit 1
+fi
+make-kpkg --rootcmd fakeroot --initrd --revision=$rev kernel_image 2&gt;&amp;1 | tee build.log
+                </revision></pre>
+        </li>
+        &nbsp;
+        <li>
+                But first, we need to add some level of concurrency to the building process. Open the kvm-kernel-build script.
+
+                <pre style="margin-left: 40px;">sudo vi /usr/bin/kvm-kernel-build</pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br/>
+        &nbsp;
+        <li>
+                Then, add the -j flag with value 2 to the make-kpkg command at the end. The updated script should look as follows:
+<pre style="margin-left: 40px;">#!/bin/sh
+rev=$1
+if [ -z "$rev" ]; then
+        echo "Usage: build64 
+        <revision>"
+        exit 1
+fi
+make-kpkg <font style="color: red; font-size: medium; font-weight: bold;">-j 2 </font>--rootcmd fakeroot --initrd --revision=$rev kernel_image 2&gt;&amp;1 | tee build.log
+                </revision></pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br/>
+        &nbsp;
+        <li>
+                To build the kernel, run the command:<br />
+        <br />
+        <b>&gt; sudo kvm-kernel-build [revision]<span class="Apple-converted-space">&nbsp;</span></b><br />
+        
+        This script takes a single argument, a revision number, which is used to
+        give a unique name to your built kernel package. You always need to run this
+        command from your kernel source directory. We will run it with sudo as the user. For example:<pre style="margin-left: 40px;">your_first_name@debian:~$ cd /home/your_first_name/kernel/linux-2.6.32.60/
+your_first_name@debian:~/kernel/linux-2.6.32.60$ sudo kvm-kernel-build 1
+  </pre>
+  <font style="color: red;">(Screenshot)</font>
+  <br/>
+  <br/>
+  &nbsp;
+        This will build the kernel in the KVM. The build process takes a while. Go ahead and relax, <a href="https://xkcd.com/303/">check your favorite
+        website</a>. If your screen goes black, you can press a key, like the down arrow, to show output again. If for some reason, you need to leave your station for a while, you should ensure that you are not "logging out". Because, in some cases, it might kill the ongoing build process. Instead, you can lock your screen. This should ensure that your build process is continuing.<br/><br/>When the build
+        process is complete, you should find a .deb file in the directory above your
+        kernel source (so use cd to go back one directory). If you want to scroll the ouput from the build, you can use shift + page up or page down to scroll.<br />
+        <br />
+        </li>
+        <li>To install your kernel, the command is:<br />
+        <br />
+        <b>&gt; dpkg -i [kernel-deb-pkg]<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        You should run this command as root (using su then typing in the root password) as in:<pre style="margin-left: 40px;">your_first_name@debian:~/kernel# su
+Password:
+root@debian:home/your_first_name/kernel$ dpkg -i linux-image-2.6.32.60_1_i386.deb
+Selecting previously deselected package linux-image-2.6.32.60.
+(Reading database ... 30041 files and directories currently installed.)
+Unpacking linux-image-2.6.32.60 (from linux-image-2.6.32.60_1_i386.deb) ...
+Done.
+Setting up linux-image-2.6.32.60 (1) ...
+Running depmod.
+Examining /etc/kernel/postinst.d.
+run-parts: executing /etc/kernel/postinst.d/initramfs-tools 2.6.32.60 /boot/vmlinuz-2.6.32.60
+update-initramfs: Generating /boot/initrd.img-2.6.32.60
+run-parts: executing /etc/kernel/postinst.d/zz-update-grub 2.6.32.60 /boot/vmlinuz-2.6.32.60
+Generating grub.cfg ...
+Found linux image: /boot/vmlinuz-2.6.32.60
+Found initrd image: /boot/initrd.img-2.6.32.60
+Found linux image: /boot/vmlinuz-2.6.32-5-686
+Found initrd image: /boot/initrd.img-2.6.32-5-686
+done
+<br/>
+<font style="color: red;">(Screenshot)</font>
+  </pre>
+  When the command completes, the kernel is installed. Go back to being logged into your user using <b>su your_first_name</b><br />
+        <br />
+        </li> 
+        <li><font style="color: red;">(Optional)</font> Our installation should have updated the boot loader to select our
+        kernel on the next boot. To check that the bootloader is set up correctly,
+        do:<pre style="margin-left: 40px;">your_first_name@eecs678-kvm:~/kernel$ cat /boot/grub/grub.cfg | more
+  </pre>
+        You should see a line that reads:<pre style="margin-left: 40px;">set default="0"
+  </pre>
+        The first 'menuentry' in this file should correspond to the kernel you just
+        built (i.e. the version number should match 2.6.32.60). The next time you
+        boot your kvm, it will have both the original kernel and the newly installed
+        kernel selectable from the boot menu. If you use the<span class="Apple-converted-space">&nbsp;</span><font face="arial">-nographic</font><span class="Apple-converted-space">&nbsp;</span>option,
+        you will not have the opportunity to select a kernel from the menu and it
+        will automatically boot the default kernel. To change the default boot
+        kernel, you need to change the<span class="Apple-converted-space">&nbsp;</span><font face="arial">GRUB_DEFAULT</font><span class="Apple-converted-space">&nbsp;</span>variable
+        in<span class="Apple-converted-space">&nbsp;</span><font face="arial">/etc/default/grub</font><span class="Apple-converted-space">&nbsp;</span>to
+        the number of the kernel in the boot menu that you want to boot into. The
+        kernels in the boot menu are listed in<span class="Apple-converted-space">&nbsp;</span><font face="arial">/boot/grub/grub.cfg</font><span class="Apple-converted-space">&nbsp;</span>and
+        are indexed at 0. If you change<span class="Apple-converted-space">&nbsp;</span><font face="arial">GRUB_DEFAULT</font>,
+        you need to update the grub menu by running (as root):<br />
+        <br />
+        <b>&gt; update-grub<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        For now, leave this option as<span class="Apple-converted-space">&nbsp;</span><font face="arial">GRUB_DEFAULT=0</font><span class="Apple-converted-space">&nbsp;</span>and
+        reboot your kvm (as root):<pre style="margin-left: 40px;">your_first_name@debian:~/kernel# su
+Password:
+root@debian:/home/your_first_name/kernel# reboot
+
+Broadcast message from root@debian (pts/0) (Fri Mar  1 22:31:19 2013):
+The system is going down for reboot NOW!
+root@debian:/home/your_first_name/kernel# Connection to localhost closed by remote host.
+Connection to localhost closed.
+  </pre>
+        This will kick you out of your kvm session. You need to wait for the KVM to
+        boot before you can log back in.<br />
+        <br />
+        </li>
+        <li>Next, we need to check that the kvm has booted into the newly built
+        kernel. First, we will reboot the system on QEMU using the following:
+        <pre style="margin-left: 40px;">root@debian:/home/your_first_name/kernel# reboot
+
+Broadcast message from root@debian (pts/0) (Fri Mar  1 22:31:19 2013):
+The system is going down for reboot NOW!
+root@debian:/home/your_first_name/kernel# Connection to localhost closed by remote host.
+Connection to localhost closed.
+        </pre>
+        Then, you should select the Linux debian 2.6.32.60 option from the blue boot menu. You can log in directly to your newly created user account:
+        <pre style="margin-left: 40px;">
+Linux debian 2.6.32.60 #1 SMP PREEMPT Fri Mar 1 21:56:30 CST 2013 i686
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+your_first_name@debian:~$
+  </pre>
+        You should see that you are running kernel version 2.6.32.60. If you want to
+        double-check this from the command line inside KVM, you can do:
+        <pre style="margin-left: 40px;">your_first_name@debian:~$ uname -a
+Linux eecs678-kvm 2.6.32.60 #1 SMP PREEMPT Fri Mar 1 21:56:30 CST 2013 i686 GNU/Linux</pre>
+        </li>
+        <font style="color: red;">(Screenshot)</font>
+        <br/>
+        <br/>
+</ol>
+<table style="width: 100%">
+                <tr>
+                    <td bgcolor="#C0C0C0" class="auto-style2">
+                        <strong>
+                            <a name="Testing"></a>Testing the System Call
+                        </strong>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+                Now that we have booted into the system with the modified kernel, we can test our system call. To test the system call, carry out the following steps:
+            </span>
+            <ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
+                <li>
+                    Go to your home directory by doing
+                    <pre style="margin-left: 40px;">cd</pre>
+                </li>
+                <br />
+                <li>
+                    Create a new "test_syscall.c" file by doing
+                    <pre style="margin-left: 40px;">vi test_syscall.c</pre>
+        
+                    The test_syscall.c file should contain the following:<br /><br />
+        
+                    <div style="margin-left: 40px;">
+                        #include &ltstdio.h&gt<br />
+                        #include &ltsys/syscall.h&gt<br />
+                        #include &ltunistd.h&gt<br />
+                        #include &ltlinux/kernel.h&gt<br />
+                        int main()<br />
+                        {<br />
+                        <div style="margin-left: 40px;">
+                            long int syscall_val = syscall(338);
+                            <br />printf("System call sys_hello returned %ld\n", syscall_val);<br />
+                            return 0;<br />
+                        </div>
+                        }<br />
+                    </div><br/><font style="color: red;">(Screenshot)</font>
+                </li>
+                <br />
+                <li>
+                    Compile the test_syscall.c file using the following command.
+                    <pre style="margin-left: 40px;">gcc test_syscall.c -o test_syscall</pre>
+                    Now run test_syscall using the following command.
+                    <pre style="margin-left: 40px;">./test_syscall</pre>
+                    <p>This should print <i>"System call sys_hello returned 100\n"</i> based on the <a href="#hello">hello.c program</a></p>
+                    <font style="color: red;">(Screenshot - after getting the output from ./test_syscall)</font>
+                </li>
+                <br />
+                <li>
+                    Issue the following command: 
+                    <pre style="margin-left: 40px;">dmesg | tail -5</pre> 
+                    <p>This prints the last 5 lines from the kernel logs. Please look for the "Hello World" message printed in the kernel logs from your system call.
+                    <br/><br/><i>"Hello World"</i> should be printed on the kernel logs based on the printk call in <a href="#hello">hello.c program</a></p>
+                    <font style="color: red;">(Screenshot - after getting the output from dmesg)</font>
+                </li>
+            </ol>
+<table style="width: 100%">
+    <tr>
+        <td bgcolor="#C0C0C0" class="auto-style2">
+            <strong>
+                <a name="Other command0"></a>Package Issues
+            </strong>
+        </td>
+    </tr>
+</table>
+<p>
+        If you get the following error during your kernel build process:
+<pre>root@debian:~# error: zlib.h: No such file or directory
+</pre>
+        Please install the libz package by executing the following command:
+<pre> root@debian:~# apt-get install libz-dev 
+</pre>
+    </p>
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Other command"></a>Other Important
+                Commands</strong></td>
+        </tr>
+</table>
+There are some important commands you should know for using your KVM. This is
+not a complete list. More commands and information will be added to this section as
+necessary.<ol type="2">
+        <li>If you would like to install or remove software, use the APT package
+        utility:<br />
+        <br />
+        <ul>
+                <li><b>&gt; apt-get install [package]<span class="Apple-converted-space">&nbsp;</span></b>--
+                install a package. You must be root to install software.</li>
+                <li><b>&gt; apt-get remove [package]<span class="Apple-converted-space">&nbsp;</span></b>--
+                remove a package. You must be root to remove software.</li>
+                <li><b>&gt; apt-cache search [string]<span class="Apple-converted-space">&nbsp;</span></b>--
+                search all available package lists for the given string. You can use
+                this utility to find software and package names.</li>
+        </ul>
+        <br />
+        <br />
+        </li>
+        <li>To transfer files to and from your KVM, use<span class="Apple-converted-space">&nbsp;</span><font face="arial">scp</font>:<br />
+        <br />
+        <b>&gt; scp [user@][src-host]:[src-file] [user@][dst-host]:[dst-file]<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        You can omit the user and host information if it matches the environment you
+        are running the command in. In this example,<span class="Apple-converted-space">&nbsp;</span><font face="arial">scp</font><span class="Apple-converted-space">&nbsp;</span>is run from
+        the KVM to copy the file<span class="Apple-converted-space">&nbsp;</span><font face="arial">foo.pdf</font><span class="Apple-converted-space">&nbsp;</span>on
+        cycle1.eecs.ku.edu to my kernel directory in the KVM:<pre>your_first_name@debian:~$ scp cycle1.eecs.ku.edu:~/Desktop/foo.txt /home/your_first_name/kernel/linux-2.6.32.60/
+amodarre@cycle1.eecs.ku.edu's password:
+foo.txt                                                               100%  954KB 954.3KB/s   00:00
+your_first_name@debian:~$
+    </pre>
+        This example, which is also run from within the KVM, copies<span class="Apple-converted-space">&nbsp;</span><font face="arial">foo.pdf</font><span class="Apple-converted-space">&nbsp;</span>from
+        the kvm to my Desktop on cycle1.eecs.ku.edu:<pre>your_first_name@eecs678-kvm:~$ scp /home/your_first_name/kernel/linux-2.6.32.60/foo.txt cycle1.eecs.ku.edu:~/Desktop/
+amodarre@cycle1.eecs.ku.edu's password:
+foo.txt                                                               100%  954KB 954.3KB/s   00:00
+your_first_name@debian:~$
+    </pre>
+        </li>
+        <li>If you need to remove a built kernel, use<span class="Apple-converted-space">&nbsp;</span><font face="arial">dpkg</font>:<br />
+        <br />
+        <b>&gt; dpkg -r [kernel-package]<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        Note that, to remove a built kernel, you cannot be currently running that
+        same kernel. This example removes the kernel we built in this lab:<pre>root@debian:~# dpkg -r linux-image-2.6.32.60
+(Reading database ... 30089 files and directories currently installed.)
+Removing linux-image-2.6.32.60 ...
+Examining /etc/kernel/prerm.d.
+Examining /etc/kernel/postrm.d .
+run-parts: executing /etc/kernel/postrm.d/initramfs-tools 2.6.32.60 /boot/vmlinuz-2.6.32.60
+update-initramfs: Deleting /boot/initrd.img-2.6.32.60
+run-parts: executing /etc/kernel/postrm.d/zz-update-grub 2.6.32.60 /boot/vmlinuz-2.6.32.60
+Generating grub.cfg ...
+Found linux image: /boot/vmlinuz-2.6.32-5-686
+Found initrd image: /boot/initrd.img-2.6.32-5-686
+done
+  </pre>
+        Note that you might need to reconfigure your boot loader after you uninstall
+        the kernel package.<br />
+        <br />
+        In most cases, you will reinstall your built kernel over a kernel you have
+        previously installed.
+        <br/><br/>
+        </li>
+        <li>Finally, to exit the kvm, run<span class="Apple-converted-space">&nbsp;</span><font face="arial">halt</font><span class="Apple-converted-space">&nbsp;</span>(as
+        root) from your kvm terminal:<br />
+        <br />
+        <b>&gt; halt<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        For example:<pre>root@debian:~# halt
+
+Broadcast message from root@kvm (pts/0) (Thu Mar 21 19:58:54 2013):
+
+The system is going down for system halt NOW!
+  </pre>
+        </li>
+</ol>
+<br />
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Other command0"></a>Debugging the Linux Kernel</strong></td>
+        </tr>
+</table>
+<p>Sometimes, it is necessary to add sometime to Linux kernel for experiment or
+fix a bug in the kernel. Debugging the kernel is a little bit different than
+debugging an application; because OS doesn't let any access from user to kernel
+mode directly. The following slides help you to understand how to debug the
+kernel.</p>
+<p><a href="debuggingkernel/DebuggingLinuxKernel.pdf">Debugging the Linux
+Kernel</a></p>
+<p>&nbsp;</p>
+<p><a href="/../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>

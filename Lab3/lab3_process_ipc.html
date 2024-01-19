@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html
+xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Oswald|Roboto" rel="stylesheet">
+<title>Lab 3 - Process and IPC</title>
+<style type="text/css">
+.heading1 {
+	font-family: 'Oswald', sans-serif;
+	font-size: xx-large;
+	text-align: Left;
+	color: black;
+	background-color: grey
+}
+.heading2 {
+	font-family: 'Roboto', sans-serif;
+	font-size: large;
+}
+.body1 {
+	font-family: 'Roboto', sans-serif;
+	font-size: medium;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	margin-bottom: 5%;
+}
+.body2 {
+	font-family: 'Roboto', sans-serif;
+	font-size: large;
+}
+.coding1 {
+	font-family: 'Cutive Mono', monospace;
+	font-size: medium;
+	background-color: lightgrey
+}
+</style>
+</head>
+
+<body class="body1">
+
+<p class="heading1"><strong>Lab 3 - The Shell, System Calls and IPC</strong></p>
+<p>In this lab, you will write a small program to illustrate the use of multiple 
+processes and pipes in a shell utility. You will be required to submit the code 
+you have written as a tar file.</p>
+
+<p class="heading1"><strong>Lab Material</strong></p>
+<ol>
+	<li><a href="ProcessIPC.pdf">Slides</a></li>
+	<li><a href="eecs678_lab3.tar">Materials</a></li>
+</ol>
+
+<p class="heading1"><strong>Assignment</strong></p>
+<p>Write a program to simulate how the shell interprets the command:</p>
+<pre class="coding1">
+find $1 -name '*'.[ch] | xargs grep -c $2 | sort -t : +1.0 -2.0 --numeric --reverse | head --lines=$3
+</pre>
+
+<p>This command will search through the directory given by the first argument for 
+files ending in .c or .h and return the N files (where N is the third argument) 
+which contain the most occurrences of the string given by the second argument. 
+You can use the lab's Makefile to run a bash script with this command:</p>
+<pre class="coding1">
+make find
+</pre>
+
+<p>You can use the <strong>finder.c</strong> file in the lab's archive as starter
+code for your program. When you have finished the program, use the <strong>build</strong>
+target in the lab's Makefile to compile it. The output of the correct program will
+match with the output of the <strong>finder.sh</strong> script which is also
+present in the lab's archive. You can use the <strong>test</strong> target in the
+lab's Makefile to check it against the expected output.<br/><br/>
+<hr width=100%>
+</p>
+
+
+<p class="heading1"><strong>Submission</strong></p>
+<p>The total grade for this lab will be awarded based 
+on the submission of your code and your quiz answers and demo. You should submit the following
+file through canvas:</p>
+<pre class="coding1">
+&ltSTUDENT_ID&gt-ipc-lab.tar.gz
+</pre>
+<ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+	<li>80% (Lab submission) - Your submission on the canvas for this lab</li>
+	<li>10% (Quiz) - A short quiz about IPC will be open on the following week during the lab hours  </li>
+	<li>10% (Demo) - A quick demo of your submission will be taken on the following week during the lab hours </li>	
+</ol>
+<p>Please ensure that all the changes you have implemented in this lab are 
+limited to the <strong>finder.c</strong> file. Please make sure to replace the "XXXXXXX"s in the Makefile with your Student ID.
+You can use the archive target in the Lab's Makefile to package the deliverable.</p>
+
+<hr width=100%><br/><br/><br/>
+<p title="IPC"><a href="../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>

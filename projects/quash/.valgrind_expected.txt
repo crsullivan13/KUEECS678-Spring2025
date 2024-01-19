@@ -1,0 +1,23 @@
+==#==
+==#== 
+==#== All heap blocks were freed -- no leaks are possible
+==#==    definitely lost: 0 bytes in 0 blocks
+==#== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==#== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: # from #)
+==#== For counts of detected and suppressed errors, rerun with: -v
+==#== HEAP SUMMARY:
+==#==    indirectly lost: 0 bytes in 0 blocks
+==#==     in use at exit: 0 bytes in 0 blocks
+==#==     in use at exit: # bytes in # blocks
+==#== LEAK SUMMARY:
+==#==      possibly lost: 0 bytes in 0 blocks
+==#== Reachable blocks (those to which a pointer was found) are not shown.
+==#==    still reachable: 0 bytes in 0 blocks
+==#==    still reachable: 0 bytes in # blocks
+==#==    still reachable: # bytes in # blocks
+==#==         suppressed: 0 bytes in 0 blocks
+==#== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==#==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==#==   total heap usage: # allocs, 0 frees, 0 bytes allocated
+==#==   total heap usage: # allocs, 0 frees, # bytes allocated
+==#==   total heap usage: # allocs, # frees, # bytes allocated

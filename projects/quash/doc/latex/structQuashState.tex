@@ -1,0 +1,49 @@
+\hypertarget{structQuashState}{}\section{Quash\+State Struct Reference}
+\label{structQuashState}\index{Quash\+State@{Quash\+State}}
+
+
+Holds information about the state and environment Quash is running in.  
+
+
+
+
+{\ttfamily \#include $<$quash.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{structQuashState_a7db3a718696ee9d0c7f8b649ccb88bb4}{running}
+\item 
+bool \hyperlink{structQuashState_a6d92242ecd91c33779ea2deae58956bf}{is\+\_\+a\+\_\+tty}
+\item 
+char $\ast$ \hyperlink{structQuashState_a69d0ad3cb3bf44a92459020d98814f7e}{parsed\+\_\+str}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds information about the state and environment Quash is running in. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structQuashState_a6d92242ecd91c33779ea2deae58956bf}\label{structQuashState_a6d92242ecd91c33779ea2deae58956bf}} 
+\index{Quash\+State@{Quash\+State}!is\+\_\+a\+\_\+tty@{is\+\_\+a\+\_\+tty}}
+\index{is\+\_\+a\+\_\+tty@{is\+\_\+a\+\_\+tty}!Quash\+State@{Quash\+State}}
+\subsubsection{\texorpdfstring{is\+\_\+a\+\_\+tty}{is\_a\_tty}}
+{\footnotesize\ttfamily bool Quash\+State\+::is\+\_\+a\+\_\+tty}
+
+Indicates if the shell is receiving input from a file or the command line \mbox{\Hypertarget{structQuashState_a69d0ad3cb3bf44a92459020d98814f7e}\label{structQuashState_a69d0ad3cb3bf44a92459020d98814f7e}} 
+\index{Quash\+State@{Quash\+State}!parsed\+\_\+str@{parsed\+\_\+str}}
+\index{parsed\+\_\+str@{parsed\+\_\+str}!Quash\+State@{Quash\+State}}
+\subsubsection{\texorpdfstring{parsed\+\_\+str}{parsed\_str}}
+{\footnotesize\ttfamily char$\ast$ Quash\+State\+::parsed\+\_\+str}
+
+Holds a string representing the parsed structure of the command input from the command line \mbox{\Hypertarget{structQuashState_a7db3a718696ee9d0c7f8b649ccb88bb4}\label{structQuashState_a7db3a718696ee9d0c7f8b649ccb88bb4}} 
+\index{Quash\+State@{Quash\+State}!running@{running}}
+\index{running@{running}!Quash\+State@{Quash\+State}}
+\subsubsection{\texorpdfstring{running}{running}}
+{\footnotesize\ttfamily bool Quash\+State\+::running}
+
+Indicates if Quash should keep accept more input 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{quash_8h}{quash.\+h}\end{DoxyCompactItemize}

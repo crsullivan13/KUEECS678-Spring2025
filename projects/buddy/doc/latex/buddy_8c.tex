@@ -1,0 +1,252 @@
+\hypertarget{buddy_8c}{}\doxysection{buddy.\+c File Reference}
+\label{buddy_8c}\index{buddy.c@{buddy.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}buddy.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}list.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structpage__t}{page\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{buddy_8c_a260e435d62aa44fda8a1368df99c4a89}{U\+S\+E\+\_\+\+D\+E\+B\+UG}}~0
+\item 
+\#define \mbox{\hyperlink{buddy_8c_a23bae2b7cd4008c90256be146e21cccf}{M\+I\+N\+\_\+\+O\+R\+D\+ER}}~12
+\item 
+\#define \mbox{\hyperlink{buddy_8c_ab08dffec08ac450d78d4c062b571939e}{M\+A\+X\+\_\+\+O\+R\+D\+ER}}~20
+\item 
+\#define \mbox{\hyperlink{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}{P\+A\+G\+E\+\_\+\+S\+I\+ZE}}~(1$<$$<$\mbox{\hyperlink{buddy_8c_a23bae2b7cd4008c90256be146e21cccf}{M\+I\+N\+\_\+\+O\+R\+D\+ER}})
+\item 
+\#define \mbox{\hyperlink{buddy_8c_a7c13b46aacf7af9976a7f058076c81a3}{P\+A\+G\+E\+\_\+\+T\+O\+\_\+\+A\+D\+DR}}(page\+\_\+idx)~(void $\ast$)((page\+\_\+idx$\ast$\mbox{\hyperlink{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}{P\+A\+G\+E\+\_\+\+S\+I\+ZE}}) + \mbox{\hyperlink{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}{g\+\_\+memory}})
+\item 
+\#define \mbox{\hyperlink{buddy_8c_aa44fbfb588ad3483e93dfc7fd28b2afd}{A\+D\+D\+R\+\_\+\+T\+O\+\_\+\+P\+A\+GE}}(addr)~((unsigned long)((void $\ast$)addr -\/ (void $\ast$)\mbox{\hyperlink{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}{g\+\_\+memory}}) / \mbox{\hyperlink{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}{P\+A\+G\+E\+\_\+\+S\+I\+ZE}})
+\item 
+\#define \mbox{\hyperlink{buddy_8c_aae7263f0e40a1e0dfefa6f53652a4a05}{B\+U\+D\+D\+Y\+\_\+\+A\+D\+DR}}(addr,  o)
+\item 
+\#define \mbox{\hyperlink{buddy_8c_a9077500d1488a75e4eec5eeb1131655e}{P\+D\+E\+B\+UG}}(fmt, ...)
+\item 
+\#define \mbox{\hyperlink{buddy_8c_abcf0d5a50dd7e407cd464c1afbd27554}{I\+F\+D\+E\+B\+UG}}(x)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{buddy_8c_a6674e7c974485f8a5dd8874e9eb125f3}{buddy\+\_\+init}} ()
+\item 
+void $\ast$ \mbox{\hyperlink{buddy_8c_a8197baf99e89c859b5326a1d455680fd}{buddy\+\_\+alloc}} (int size)
+\item 
+void \mbox{\hyperlink{buddy_8c_a961ef8a2fd9df43d50945100f172b97a}{buddy\+\_\+free}} (void $\ast$addr)
+\item 
+void \mbox{\hyperlink{buddy_8c_aa16d99b90dd0a6b9d7e3db0573620c21}{buddy\+\_\+dump}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} \mbox{\hyperlink{buddy_8c_a6d390a89d1f6c149cef6284d2c0351df}{free\+\_\+area}} \mbox{[}\mbox{\hyperlink{buddy_8c_ab08dffec08ac450d78d4c062b571939e}{M\+A\+X\+\_\+\+O\+R\+D\+ER}}+1\mbox{]}
+\item 
+char \mbox{\hyperlink{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}{g\+\_\+memory}} \mbox{[}1$<$$<$ \mbox{\hyperlink{buddy_8c_ab08dffec08ac450d78d4c062b571939e}{M\+A\+X\+\_\+\+O\+R\+D\+ER}}\mbox{]}
+\item 
+\mbox{\hyperlink{structpage__t}{page\+\_\+t}} \mbox{\hyperlink{buddy_8c_afbc14d1f5ec9e22ef3e00d9d33ee0c08}{g\+\_\+pages}} \mbox{[}(1$<$$<$ \mbox{\hyperlink{buddy_8c_ab08dffec08ac450d78d4c062b571939e}{M\+A\+X\+\_\+\+O\+R\+D\+ER}})/\mbox{\hyperlink{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}{P\+A\+G\+E\+\_\+\+S\+I\+ZE}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{buddy_8c_aa44fbfb588ad3483e93dfc7fd28b2afd}\label{buddy_8c_aa44fbfb588ad3483e93dfc7fd28b2afd}} 
+\index{buddy.c@{buddy.c}!ADDR\_TO\_PAGE@{ADDR\_TO\_PAGE}}
+\index{ADDR\_TO\_PAGE@{ADDR\_TO\_PAGE}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{ADDR\_TO\_PAGE}{ADDR\_TO\_PAGE}}
+{\footnotesize\ttfamily \#define A\+D\+D\+R\+\_\+\+T\+O\+\_\+\+P\+A\+GE(\begin{DoxyParamCaption}\item[{}]{addr }\end{DoxyParamCaption})~((unsigned long)((void $\ast$)addr -\/ (void $\ast$)\mbox{\hyperlink{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}{g\+\_\+memory}}) / \mbox{\hyperlink{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}{P\+A\+G\+E\+\_\+\+S\+I\+ZE}})}
+
+
+
+Definition at line 32 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_aae7263f0e40a1e0dfefa6f53652a4a05}\label{buddy_8c_aae7263f0e40a1e0dfefa6f53652a4a05}} 
+\index{buddy.c@{buddy.c}!BUDDY\_ADDR@{BUDDY\_ADDR}}
+\index{BUDDY\_ADDR@{BUDDY\_ADDR}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{BUDDY\_ADDR}{BUDDY\_ADDR}}
+{\footnotesize\ttfamily \#define B\+U\+D\+D\+Y\+\_\+\+A\+D\+DR(\begin{DoxyParamCaption}\item[{}]{addr,  }\item[{}]{o }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                     (\textcolor{keywordtype}{void} *)((((\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long})addr -\/ (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long})\mbox{\hyperlink{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}{g\_memory}}) \string^ (1<<o)) \(\backslash\)}
+\DoxyCodeLine{                                     + (\textcolor{keywordtype}{unsigned} long)\mbox{\hyperlink{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}{g\_memory}})}
+
+\end{DoxyCode}
+
+
+Definition at line 35 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_abcf0d5a50dd7e407cd464c1afbd27554}\label{buddy_8c_abcf0d5a50dd7e407cd464c1afbd27554}} 
+\index{buddy.c@{buddy.c}!IFDEBUG@{IFDEBUG}}
+\index{IFDEBUG@{IFDEBUG}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{IFDEBUG}{IFDEBUG}}
+{\footnotesize\ttfamily \#define I\+F\+D\+E\+B\+UG(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_ab08dffec08ac450d78d4c062b571939e}\label{buddy_8c_ab08dffec08ac450d78d4c062b571939e}} 
+\index{buddy.c@{buddy.c}!MAX\_ORDER@{MAX\_ORDER}}
+\index{MAX\_ORDER@{MAX\_ORDER}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_ORDER}{MAX\_ORDER}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+O\+R\+D\+ER~20}
+
+
+
+Definition at line 25 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_a23bae2b7cd4008c90256be146e21cccf}\label{buddy_8c_a23bae2b7cd4008c90256be146e21cccf}} 
+\index{buddy.c@{buddy.c}!MIN\_ORDER@{MIN\_ORDER}}
+\index{MIN\_ORDER@{MIN\_ORDER}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{MIN\_ORDER}{MIN\_ORDER}}
+{\footnotesize\ttfamily \#define M\+I\+N\+\_\+\+O\+R\+D\+ER~12}
+
+
+
+Definition at line 24 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}\label{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}} 
+\index{buddy.c@{buddy.c}!PAGE\_SIZE@{PAGE\_SIZE}}
+\index{PAGE\_SIZE@{PAGE\_SIZE}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{PAGE\_SIZE}{PAGE\_SIZE}}
+{\footnotesize\ttfamily \#define P\+A\+G\+E\+\_\+\+S\+I\+ZE~(1$<$$<$\mbox{\hyperlink{buddy_8c_a23bae2b7cd4008c90256be146e21cccf}{M\+I\+N\+\_\+\+O\+R\+D\+ER}})}
+
+
+
+Definition at line 27 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_a7c13b46aacf7af9976a7f058076c81a3}\label{buddy_8c_a7c13b46aacf7af9976a7f058076c81a3}} 
+\index{buddy.c@{buddy.c}!PAGE\_TO\_ADDR@{PAGE\_TO\_ADDR}}
+\index{PAGE\_TO\_ADDR@{PAGE\_TO\_ADDR}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{PAGE\_TO\_ADDR}{PAGE\_TO\_ADDR}}
+{\footnotesize\ttfamily \#define P\+A\+G\+E\+\_\+\+T\+O\+\_\+\+A\+D\+DR(\begin{DoxyParamCaption}\item[{}]{page\+\_\+idx }\end{DoxyParamCaption})~(void $\ast$)((page\+\_\+idx$\ast$\mbox{\hyperlink{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}{P\+A\+G\+E\+\_\+\+S\+I\+ZE}}) + \mbox{\hyperlink{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}{g\+\_\+memory}})}
+
+
+
+Definition at line 29 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_a9077500d1488a75e4eec5eeb1131655e}\label{buddy_8c_a9077500d1488a75e4eec5eeb1131655e}} 
+\index{buddy.c@{buddy.c}!PDEBUG@{PDEBUG}}
+\index{PDEBUG@{PDEBUG}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{PDEBUG}{PDEBUG}}
+{\footnotesize\ttfamily \#define P\+D\+E\+B\+UG(\begin{DoxyParamCaption}\item[{}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Definition at line 44 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_a260e435d62aa44fda8a1368df99c4a89}\label{buddy_8c_a260e435d62aa44fda8a1368df99c4a89}} 
+\index{buddy.c@{buddy.c}!USE\_DEBUG@{USE\_DEBUG}}
+\index{USE\_DEBUG@{USE\_DEBUG}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{USE\_DEBUG}{USE\_DEBUG}}
+{\footnotesize\ttfamily \#define U\+S\+E\+\_\+\+D\+E\+B\+UG~0}
+
+Buddy Allocator
+
+For the list library usage, see \href{http://www.mcs.anl.gov/~kazutomo/list/}{\texttt{ http\+://www.\+mcs.\+anl.\+gov/$\sim$kazutomo/list/}} 
+
+Definition at line 10 of file buddy.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{buddy_8c_a8197baf99e89c859b5326a1d455680fd}\label{buddy_8c_a8197baf99e89c859b5326a1d455680fd}} 
+\index{buddy.c@{buddy.c}!buddy\_alloc@{buddy\_alloc}}
+\index{buddy\_alloc@{buddy\_alloc}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{buddy\_alloc()}{buddy\_alloc()}}
+{\footnotesize\ttfamily void$\ast$ buddy\+\_\+alloc (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+Allocate a memory block.
+
+On a memory request, the allocator returns the head of a free-\/list of the matching size (i.\+e., smallest block that satisfies the request). If the free-\/list of the matching block size is empty, then a larger block size will be selected. The selected (large) block is then splitted into two smaller blocks. Among the two blocks, left block will be used for allocation or be further splitted while the right block will be added to the appropriate free-\/list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & size in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+memory block address 
+\end{DoxyReturn}
+
+
+Definition at line 110 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_aa16d99b90dd0a6b9d7e3db0573620c21}\label{buddy_8c_aa16d99b90dd0a6b9d7e3db0573620c21}} 
+\index{buddy.c@{buddy.c}!buddy\_dump@{buddy\_dump}}
+\index{buddy\_dump@{buddy\_dump}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{buddy\_dump()}{buddy\_dump()}}
+{\footnotesize\ttfamily void buddy\+\_\+dump (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Print the buddy system status---order oriented
+
+print free pages in each order. 
+
+Definition at line 135 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_a961ef8a2fd9df43d50945100f172b97a}\label{buddy_8c_a961ef8a2fd9df43d50945100f172b97a}} 
+\index{buddy.c@{buddy.c}!buddy\_free@{buddy\_free}}
+\index{buddy\_free@{buddy\_free}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{buddy\_free()}{buddy\_free()}}
+{\footnotesize\ttfamily void buddy\+\_\+free (\begin{DoxyParamCaption}\item[{void $\ast$}]{addr }\end{DoxyParamCaption})}
+
+Free an allocated memory block.
+
+Whenever a block is freed, the allocator checks its buddy. If the buddy is free as well, then the two buddies are combined to form a bigger block. This process continues until one of the buddies is not free.
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & memory block address to be freed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 125 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_a6674e7c974485f8a5dd8874e9eb125f3}\label{buddy_8c_a6674e7c974485f8a5dd8874e9eb125f3}} 
+\index{buddy.c@{buddy.c}!buddy\_init@{buddy\_init}}
+\index{buddy\_init@{buddy\_init}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{buddy\_init()}{buddy\_init()}}
+{\footnotesize\ttfamily void buddy\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Initialize the buddy system 
+
+Definition at line 79 of file buddy.\+c.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{buddy_8c_a6d390a89d1f6c149cef6284d2c0351df}\label{buddy_8c_a6d390a89d1f6c149cef6284d2c0351df}} 
+\index{buddy.c@{buddy.c}!free\_area@{free\_area}}
+\index{free\_area@{free\_area}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{free\_area}{free\_area}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} free\+\_\+area\mbox{[}\mbox{\hyperlink{buddy_8c_ab08dffec08ac450d78d4c062b571939e}{M\+A\+X\+\_\+\+O\+R\+D\+ER}}+1\mbox{]}}
+
+
+
+Definition at line 60 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}\label{buddy_8c_ad6d688a63e574ba24b0247b2bec1e31d}} 
+\index{buddy.c@{buddy.c}!g\_memory@{g\_memory}}
+\index{g\_memory@{g\_memory}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{g\_memory}{g\_memory}}
+{\footnotesize\ttfamily char g\+\_\+memory\mbox{[}1$<$$<$ \mbox{\hyperlink{buddy_8c_ab08dffec08ac450d78d4c062b571939e}{M\+A\+X\+\_\+\+O\+R\+D\+ER}}\mbox{]}}
+
+
+
+Definition at line 63 of file buddy.\+c.
+
+\mbox{\Hypertarget{buddy_8c_afbc14d1f5ec9e22ef3e00d9d33ee0c08}\label{buddy_8c_afbc14d1f5ec9e22ef3e00d9d33ee0c08}} 
+\index{buddy.c@{buddy.c}!g\_pages@{g\_pages}}
+\index{g\_pages@{g\_pages}!buddy.c@{buddy.c}}
+\doxysubsubsection{\texorpdfstring{g\_pages}{g\_pages}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpage__t}{page\+\_\+t}} g\+\_\+pages\mbox{[}(1$<$$<$ \mbox{\hyperlink{buddy_8c_ab08dffec08ac450d78d4c062b571939e}{M\+A\+X\+\_\+\+O\+R\+D\+ER}})/\mbox{\hyperlink{buddy_8c_a7d467c1d283fdfa1f2081ba1e0d01b6e}{P\+A\+G\+E\+\_\+\+S\+I\+ZE}}\mbox{]}}
+
+
+
+Definition at line 66 of file buddy.\+c.
+

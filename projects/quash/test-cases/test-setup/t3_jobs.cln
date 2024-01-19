@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Changing job PIDs to something predictable in $OUTPUT..."
+sed -i 's/\t[ ]*[0-9]*\t/\t#PID#\t/g' $OUTPUT

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html
+xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Lab 10 - Paging</title>
+<style type="text/css">
+.auto-style1 {
+	font-size: xx-large;
+}
+.auto-style2 {
+	font-size: large;
+}
+</style>
+</head>
+
+<body>
+
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style1"><strong>Lab 9: Memory Management using Paging</strong></td>
+	</tr>
+</table>
+<p>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size:
+large; font-style: normal; font-variant: normal; font-weight: normal;
+letter-spacing: normal; line-height: normal; orphans: auto; text-align: start;
+text-indent: 0px; text-transform: none; white-space: normal; widows: auto;
+word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255,
+255, 255); display: inline !important; float: none;"> In today's lab, we will simulate a memory management mechanism called paging.<span class="Apple-converted-space">&nbsp;</span></span></p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Lab Materials</strong></td>
+	</tr>
+</table>
+<ul>
+	<li><a href="PagingLab.pdf">Slides</a></li>
+    <li><a href="lab9.tar">Lab Materials</a><br/><br/></li>
+    <li>
+        <a href="https://mediahub.ku.edu/media/Lab10_Paging/1_4ljsy65d">Video Discussion</a><br/><br/>
+        <iframe id="kmsembed-1_4ljsy65d" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_4ljsy65d/uiConfId/45147491" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Kaltura Player"></iframe><br/><br/>
+    </li>
+</ul>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Assignment</strong></td>
+	</tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size:
+medium; font-style: normal; font-variant: normal; font-weight: normal;
+letter-spacing: normal; line-height: normal; orphans: auto; text-align: start;
+text-indent: 0px; text-transform: none; white-space: normal; widows: auto;
+word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255,
+255, 255); display: inline !important; float: none;"> 
+    <br/>Your task for today's lab is to implement a page table. The page table should be able to hold references of the frame numbers for the page numbers. You will be given the following as an input file:
+</span>
+<ul>
+    <li>Logical address space size - (Could be a different value but, <font color="red">no need to change for this lab</font>)</li>
+    <li>Physical address space size - (Could be a different value but, <font color="red">no need to change for this lab</font>)</li>
+    <li>Page size - (Change this and try with different page sizes)</li>
+    <li>List of logical addresses - (Try randomly generating your own)</li>
+</ul>
+<ol style="color: rgb(0, 0, 0); font-family:
+'Times New Roman'; font-size: medium; font-style: normal; font-variant:
+normal; font-weight: normal; letter-spacing: normal; line-height: normal;
+orphans: auto; text-align: start; text-indent: 0px; text-transform: none;
+white-space: normal; widows: auto; word-spacing: 0px;
+-webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"
+type="2">
+	<li>Compile the given code:<br/><br/>&nbsp;gcc VM_addr_map.c -o VM_addr_map -lm<br/><br/></li>
+    <li>Run the program on the given input files:<br/><br/>&nbsp;./VM_addr_map < inp1.txt<br/><br/></li>
+    <li>It doesn't do much yet. The input and output are given below:<br/><br/>&nbsp;<b>Input:</b><br/>
+        &nbsp;&nbsp;Logical address space size: 2^32<br/>
+        &nbsp;&nbsp;Physical address space size: 2^32<br/>
+        &nbsp;&nbsp;Page size: 2^31<br/>
+        &nbsp;&nbsp;0xd6334873<br/>
+        &nbsp;&nbsp;0x74b0dc51<br/>
+        &nbsp;&nbsp;0xa9495cff<br/>
+        &nbsp;&nbsp;0x2ae8944a<br/>
+    <br/><br/><b>&nbsp;Output without page table and address translation:</b><br/>
+        &nbsp;&nbsp;Logical address: 0xd6334873<br/>
+        &nbsp;&nbsp;Logical address: 0x74b0dc51<br/>
+        &nbsp;&nbsp;Logical address: 0xa9495cff<br/>
+        &nbsp;&nbsp;Logical address: 0x2ae8944a<br/><br/>
+
+    
+    <li>Your task is to implement the page table and address translation in the VM_addr_map.c file, so that we can get the following output for the given inp1.txt file:<p />
+    <b>Output with page table and address translation:</b><br/>
+        &nbsp;&nbsp;Number of Pages: 2, Number of Frames: 2<br/><br/>
+        &nbsp;&nbsp;Logical address: 0xd6334873<br/>
+        &nbsp;&nbsp;Page Number: 1<br/>
+        &nbsp;&nbsp;Page Fault!<br/>
+        &nbsp;&nbsp;Frame number: 0<br/>
+        &nbsp;&nbsp;Physical address: 0x56334873<br/>
+        
+    <br />
+        
+        &nbsp;&nbsp;Logical address: 0x74b0dc51<br/>
+        &nbsp;&nbsp;Page Number: 0<br/>
+        &nbsp;&nbsp;Page Fault!<br/>
+        &nbsp;&nbsp;Frame number: 1<br/>
+        &nbsp;&nbsp;Physical address: 0xf4b0dc51<br/>
+        
+    <br />
+        
+        &nbsp;&nbsp;Logical address: 0xa9495cff<br/>
+        &nbsp;&nbsp;Page Number: 1<br/>
+        &nbsp;&nbsp;Frame number: 0<br/>
+        &nbsp;&nbsp;Physical address: 0x29495cff<br/>
+        
+    <br />
+        
+        &nbsp;&nbsp;Logical address: 0x2ae8944a<br/>
+        &nbsp;&nbsp;Page Number: 0<br/>
+        &nbsp;&nbsp;Frame number: 1<br/>
+        &nbsp;&nbsp;Physical address: 0xaae8944a<br/>
+        
+    <br />
+    </li>
+    <li>Observe that some of the mapping outputs are printing Page Fault. Page fault occurs if a page (from logical address space) is 
+        not currently mapped to a frame (from physical address space). You can check for this error based on the page table and 
+        print out Page Fault when appropriate. Then you can look for the first available frame (sequentially from the beginning of mem_map table)
+        in the physical address space and map that to that specific page using the page table.</li><br/>
+</ol>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Assignment</strong></td>
+	</tr>
+</table>
+<p>Once you are done with the code, please check your output on the given input text files.
+        Before submission, please ensure that your code is working on the cycle servers.
+        Finally, you can submit just the source code through Canvas. </p>
+
+<p><a href="../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>

@@ -1,0 +1,318 @@
+\hypertarget{command_8c}{}\section{src/command.c File Reference}
+\label{command_8c}\index{src/command.\+c@{src/command.\+c}}
+
+
+Implements functions used to generate and manage commands.  
+
+
+{\ttfamily \#include \char`\"{}command.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structCommandHolder}{Command\+Holder} \hyperlink{command_8c_abd98f4305f003851cd57b9b20c2598fb}{mk\+\_\+command\+\_\+holder} (char $\ast$redirect\+\_\+in, char $\ast$redirect\+\_\+out, char flags, \hyperlink{unionCommand}{Command} cmd)
+\begin{DoxyCompactList}\small\item\em Create the properties for a command. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_aacc43eef331547248883e982f656059a}{mk\+\_\+generic\+\_\+command} (char $\ast$$\ast$args)
+\begin{DoxyCompactList}\small\item\em Create a {\itshape \hyperlink{structGenericCommand}{Generic\+Command}} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_a080b500df760f29d744377cfffb7a36f}{mk\+\_\+echo\+\_\+command} (char $\ast$$\ast$strs)
+\begin{DoxyCompactList}\small\item\em Create a {\itshape \hyperlink{structGenericCommand}{Generic\+Command}} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_a284929366e9d674109fec7c9872958d8}{mk\+\_\+export\+\_\+command} (char $\ast$env\+\_\+var, char $\ast$val)
+\begin{DoxyCompactList}\small\item\em Create a {\itshape \hyperlink{structExportCommand}{Export\+Command}} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_a054007a0e38b3f58b824e02449ff66b6}{mk\+\_\+cd\+\_\+command} (char $\ast$dir)
+\begin{DoxyCompactList}\small\item\em Create a {\itshape \hyperlink{structCDCommand}{C\+D\+Command}} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_a33d431b7e34f5f063827109085810eac}{mk\+\_\+kill\+\_\+command} (char $\ast$sig, char $\ast$job)
+\begin{DoxyCompactList}\small\item\em Create a {\itshape \hyperlink{structKillCommand}{Kill\+Command}} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_ab18329e0efa0ff9bff9f41377d85c39d}{mk\+\_\+pwd\+\_\+command} ()
+\begin{DoxyCompactList}\small\item\em Create a {\itshape P\+W\+D\+Command} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_aa202066429fbb26a13cdd702953562c4}{mk\+\_\+jobs\+\_\+command} ()
+\begin{DoxyCompactList}\small\item\em Create a {\itshape Jobs\+Command} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_a60697d98410555ac18a86b2f544eea35}{mk\+\_\+exit\+\_\+command} ()
+\begin{DoxyCompactList}\small\item\em Create a {\itshape Exit\+Command} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{unionCommand}{Command} \hyperlink{command_8c_ade4ef9eca0d11eaa7690942a6d99d551}{mk\+\_\+eoc} ()
+\begin{DoxyCompactList}\small\item\em Create a {\itshape E\+O\+C\+Command} structure and return a copy. \end{DoxyCompactList}\item 
+\hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type} \hyperlink{command_8c_a1708aa65874060aa7ef99bf9e1671f5c}{get\+\_\+command\+\_\+type} (\hyperlink{unionCommand}{Command} cmd)
+\begin{DoxyCompactList}\small\item\em Get the type of the command. \end{DoxyCompactList}\item 
+\hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type} \hyperlink{command_8c_aede59bdfd29950fcbb7ace71cb20ea34}{get\+\_\+command\+\_\+holder\+\_\+type} (\hyperlink{structCommandHolder}{Command\+Holder} holder)
+\begin{DoxyCompactList}\small\item\em Get the type of the {\itshape \hyperlink{unionCommand}{Command}} in the {\itshape \hyperlink{structCommandHolder}{Command\+Holder}}. \end{DoxyCompactList}\item 
+void \hyperlink{command_8c_a733982c2f2d2726bf206fc270270b66a}{debug\+\_\+print\+\_\+script} (const \hyperlink{structCommandHolder}{Command\+Holder} $\ast$holders)
+\begin{DoxyCompactList}\small\item\em Print all commands in the script with {\itshape print\+\_\+command()} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements functions used to generate and manage commands. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{command_8c_a733982c2f2d2726bf206fc270270b66a}\label{command_8c_a733982c2f2d2726bf206fc270270b66a}} 
+\index{command.\+c@{command.\+c}!debug\+\_\+print\+\_\+script@{debug\+\_\+print\+\_\+script}}
+\index{debug\+\_\+print\+\_\+script@{debug\+\_\+print\+\_\+script}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{debug\+\_\+print\+\_\+script()}{debug\_print\_script()}}
+{\footnotesize\ttfamily void debug\+\_\+print\+\_\+script (\begin{DoxyParamCaption}\item[{const \hyperlink{structCommandHolder}{Command\+Holder} $\ast$}]{holders }\end{DoxyParamCaption})}
+
+
+
+Print all commands in the script with {\itshape print\+\_\+command()} 
+
+\begin{DoxyNote}{Note}
+This only works when the {\itshape D\+E\+B\+UG} macro is defined
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em holders} & {\itshape \hyperlink{structCommandHolder}{Command\+Holder}} array to print\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structCommandHolder}{Command\+Holder} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_aede59bdfd29950fcbb7ace71cb20ea34}\label{command_8c_aede59bdfd29950fcbb7ace71cb20ea34}} 
+\index{command.\+c@{command.\+c}!get\+\_\+command\+\_\+holder\+\_\+type@{get\+\_\+command\+\_\+holder\+\_\+type}}
+\index{get\+\_\+command\+\_\+holder\+\_\+type@{get\+\_\+command\+\_\+holder\+\_\+type}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+command\+\_\+holder\+\_\+type()}{get\_command\_holder\_type()}}
+{\footnotesize\ttfamily \hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type} get\+\_\+command\+\_\+holder\+\_\+type (\begin{DoxyParamCaption}\item[{\hyperlink{structCommandHolder}{Command\+Holder}}]{holder }\end{DoxyParamCaption})}
+
+
+
+Get the type of the {\itshape \hyperlink{unionCommand}{Command}} in the {\itshape \hyperlink{structCommandHolder}{Command\+Holder}}. 
+
+Uses the property that all \hyperlink{unionCommand}{Command} variants can be cast to {\itshape \hyperlink{structSimpleCommand}{Simple\+Command}} to extract the {\itshape Command\+Type} of the \hyperlink{unionCommand}{Command}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em holder} & \hyperlink{structCommandHolder}{Command\+Holder} from which this function extracts the {\itshape Command\+Type} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting Command\+Type of the {\ttfamily cmd} parameter
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type}, \hyperlink{structCommandHolder}{Command\+Holder}, \hyperlink{structSimpleCommand}{Simple\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_a1708aa65874060aa7ef99bf9e1671f5c}\label{command_8c_a1708aa65874060aa7ef99bf9e1671f5c}} 
+\index{command.\+c@{command.\+c}!get\+\_\+command\+\_\+type@{get\+\_\+command\+\_\+type}}
+\index{get\+\_\+command\+\_\+type@{get\+\_\+command\+\_\+type}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+command\+\_\+type()}{get\_command\_type()}}
+{\footnotesize\ttfamily \hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type} get\+\_\+command\+\_\+type (\begin{DoxyParamCaption}\item[{\hyperlink{unionCommand}{Command}}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Get the type of the command. 
+
+Uses the property that all {\itshape \hyperlink{unionCommand}{Command}} variants can be cast to {\itshape \hyperlink{structSimpleCommand}{Simple\+Command}} to extract the {\itshape Command\+Type} of the \hyperlink{unionCommand}{Command}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & \hyperlink{unionCommand}{Command} from which this function extracts the {\itshape Command\+Type} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting {\itshape Command\+Type} of the {\ttfamily cmd} parameter
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type}, \hyperlink{unionCommand}{Command}, \hyperlink{structSimpleCommand}{Simple\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_a054007a0e38b3f58b824e02449ff66b6}\label{command_8c_a054007a0e38b3f58b824e02449ff66b6}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+cd\+\_\+command@{mk\+\_\+cd\+\_\+command}}
+\index{mk\+\_\+cd\+\_\+command@{mk\+\_\+cd\+\_\+command}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+cd\+\_\+command()}{mk\_cd\_command()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+cd\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{dir }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape \hyperlink{structCDCommand}{C\+D\+Command}} structure and return a copy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & Path to the directory we wish to change to\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Copy of constructed \hyperlink{structCDCommand}{C\+D\+Command}
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+realpath(), \hyperlink{unionCommand}{Command}, \hyperlink{structCDCommand}{C\+D\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_abd98f4305f003851cd57b9b20c2598fb}\label{command_8c_abd98f4305f003851cd57b9b20c2598fb}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+command\+\_\+holder@{mk\+\_\+command\+\_\+holder}}
+\index{mk\+\_\+command\+\_\+holder@{mk\+\_\+command\+\_\+holder}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+command\+\_\+holder()}{mk\_command\_holder()}}
+{\footnotesize\ttfamily \hyperlink{structCommandHolder}{Command\+Holder} mk\+\_\+command\+\_\+holder (\begin{DoxyParamCaption}\item[{char $\ast$}]{redirect\+\_\+in,  }\item[{char $\ast$}]{redirect\+\_\+out,  }\item[{char}]{flags,  }\item[{\hyperlink{unionCommand}{Command}}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Create the properties for a command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em redirect\+\_\+in} & \hyperlink{structRedirect}{Redirect} standard in of this command to a file name {\itshape redirect\+\_\+in} \\
+\hline
+{\em redirect\+\_\+out} & \hyperlink{structRedirect}{Redirect} standard out of this command to a file name {\itshape redirect\+\_\+out} \\
+\hline
+{\em flags} & A set of bits that hold information about how to execute the command. The properties can be extracted from the flags field by using a bit-\/wise \& (i.\+e. flags \& {\itshape P\+I\+P\+E\+\_\+\+IN}) are macro defined as\+:
+\begin{DoxyItemize}
+\item {\itshape R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+IN} 
+\item {\itshape R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+O\+UT} 
+\item {\itshape R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+A\+P\+P\+E\+ND} 
+\item {\itshape P\+I\+P\+E\+\_\+\+IN} 
+\item {\itshape P\+I\+P\+E\+\_\+\+O\+UT} 
+\item {\itshape B\+A\+C\+K\+G\+R\+O\+U\+ND} 
+\end{DoxyItemize}\\
+\hline
+{\em cmd} & \hyperlink{unionCommand}{Command} to hold\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \hyperlink{structCommandHolder}{Command\+Holder}
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type}, \hyperlink{command_8h_ab6714acca9cb634f10b7f5a23c349e3e}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+IN}, \hyperlink{command_8h_af178f598332c2233dfbdc334a05a2a66}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+O\+UT}, \hyperlink{command_8h_a6b682fe2ba1a0c489d50822c3feecdac}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+A\+P\+P\+E\+ND}, \hyperlink{command_8h_a3fc15bc38c2cd3ce6f7dd40f4c0115dd}{P\+I\+P\+E\+\_\+\+IN}, \hyperlink{command_8h_af2aa1b20c10d6507c47f11588e21c324}{P\+I\+P\+E\+\_\+\+O\+UT}, \hyperlink{command_8h_a850b2f07a67b73890889e63fb8a49fda}{B\+A\+C\+K\+G\+R\+O\+U\+ND}, \hyperlink{unionCommand}{Command}, \hyperlink{structCommandHolder}{Command\+Holder} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_a080b500df760f29d744377cfffb7a36f}\label{command_8c_a080b500df760f29d744377cfffb7a36f}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+echo\+\_\+command@{mk\+\_\+echo\+\_\+command}}
+\index{mk\+\_\+echo\+\_\+command@{mk\+\_\+echo\+\_\+command}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+echo\+\_\+command()}{mk\_echo\_command()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+echo\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{args }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape \hyperlink{structGenericCommand}{Generic\+Command}} structure and return a copy. 
+
+\begin{DoxyReturn}{Returns}
+Copy of constructed \hyperlink{structGenericCommand}{Generic\+Command}
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type}, \hyperlink{command_8h_ab6714acca9cb634f10b7f5a23c349e3e}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+IN}, \hyperlink{command_8h_af178f598332c2233dfbdc334a05a2a66}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+O\+UT}, \hyperlink{command_8h_a6b682fe2ba1a0c489d50822c3feecdac}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+A\+P\+P\+E\+ND}, \hyperlink{command_8h_a3fc15bc38c2cd3ce6f7dd40f4c0115dd}{P\+I\+P\+E\+\_\+\+IN}, \hyperlink{command_8h_af2aa1b20c10d6507c47f11588e21c324}{P\+I\+P\+E\+\_\+\+O\+UT}, \hyperlink{command_8h_a850b2f07a67b73890889e63fb8a49fda}{B\+A\+C\+K\+G\+R\+O\+U\+ND}, \hyperlink{unionCommand}{Command}, \hyperlink{structGenericCommand}{Generic\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_ade4ef9eca0d11eaa7690942a6d99d551}\label{command_8c_ade4ef9eca0d11eaa7690942a6d99d551}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+eoc@{mk\+\_\+eoc}}
+\index{mk\+\_\+eoc@{mk\+\_\+eoc}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+eoc()}{mk\_eoc()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+eoc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape E\+O\+C\+Command} structure and return a copy. 
+
+\begin{DoxyReturn}{Returns}
+Copy of constructed E\+O\+C\+Command
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{unionCommand}{Command}, \hyperlink{command_8h_ae5bf5cf7a34428c221f28179034dd125}{E\+O\+C\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_a60697d98410555ac18a86b2f544eea35}\label{command_8c_a60697d98410555ac18a86b2f544eea35}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+exit\+\_\+command@{mk\+\_\+exit\+\_\+command}}
+\index{mk\+\_\+exit\+\_\+command@{mk\+\_\+exit\+\_\+command}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+exit\+\_\+command()}{mk\_exit\_command()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+exit\+\_\+command (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape Exit\+Command} structure and return a copy. 
+
+\begin{DoxyReturn}{Returns}
+Copy of constructed Exit\+Command
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{unionCommand}{Command}, \hyperlink{command_8h_a354cb87bc40859e5595de56b675732bc}{Exit\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_a284929366e9d674109fec7c9872958d8}\label{command_8c_a284929366e9d674109fec7c9872958d8}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+export\+\_\+command@{mk\+\_\+export\+\_\+command}}
+\index{mk\+\_\+export\+\_\+command@{mk\+\_\+export\+\_\+command}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+export\+\_\+command()}{mk\_export\_command()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+export\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{env\+\_\+var,  }\item[{char $\ast$}]{val }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape \hyperlink{structExportCommand}{Export\+Command}} structure and return a copy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env\+\_\+var} & Name of environment variable to set\\
+\hline
+{\em val} & String that should be stored in {\itshape env\+\_\+var} environment variable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Copy of constructed \hyperlink{structExportCommand}{Export\+Command}
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{execute_8c_afeab372587374ba444aa9bdfb6cfa0d8}{lookup\+\_\+env()}, \hyperlink{execute_8h_afa91981c1edd7bb1c86292d80b27e170}{write\+\_\+env()}, \hyperlink{unionCommand}{Command}, \hyperlink{structExportCommand}{Export\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_aacc43eef331547248883e982f656059a}\label{command_8c_aacc43eef331547248883e982f656059a}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+generic\+\_\+command@{mk\+\_\+generic\+\_\+command}}
+\index{mk\+\_\+generic\+\_\+command@{mk\+\_\+generic\+\_\+command}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+generic\+\_\+command()}{mk\_generic\_command()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+generic\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{args }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape \hyperlink{structGenericCommand}{Generic\+Command}} structure and return a copy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & A N\+U\+LL terminated array of c-\/strings ready to pass to {\itshape exec} functions\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Copy of constructed \hyperlink{structGenericCommand}{Generic\+Command}
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type}, \hyperlink{command_8h_ab6714acca9cb634f10b7f5a23c349e3e}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+IN}, \hyperlink{command_8h_af178f598332c2233dfbdc334a05a2a66}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+O\+UT}, \hyperlink{command_8h_a6b682fe2ba1a0c489d50822c3feecdac}{R\+E\+D\+I\+R\+E\+C\+T\+\_\+\+A\+P\+P\+E\+ND}, \hyperlink{command_8h_a3fc15bc38c2cd3ce6f7dd40f4c0115dd}{P\+I\+P\+E\+\_\+\+IN}, \hyperlink{command_8h_af2aa1b20c10d6507c47f11588e21c324}{P\+I\+P\+E\+\_\+\+O\+UT}, \hyperlink{command_8h_a850b2f07a67b73890889e63fb8a49fda}{B\+A\+C\+K\+G\+R\+O\+U\+ND}, \hyperlink{unionCommand}{Command}, \hyperlink{structGenericCommand}{Generic\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_aa202066429fbb26a13cdd702953562c4}\label{command_8c_aa202066429fbb26a13cdd702953562c4}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+jobs\+\_\+command@{mk\+\_\+jobs\+\_\+command}}
+\index{mk\+\_\+jobs\+\_\+command@{mk\+\_\+jobs\+\_\+command}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+jobs\+\_\+command()}{mk\_jobs\_command()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+jobs\+\_\+command (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape Jobs\+Command} structure and return a copy. 
+
+\begin{DoxyReturn}{Returns}
+Copy of constructed Jobs\+Command
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{unionCommand}{Command}, \hyperlink{command_8h_a027de4ed5fe4b0313c6c8ee0c2c1806b}{Jobs\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_a33d431b7e34f5f063827109085810eac}\label{command_8c_a33d431b7e34f5f063827109085810eac}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+kill\+\_\+command@{mk\+\_\+kill\+\_\+command}}
+\index{mk\+\_\+kill\+\_\+command@{mk\+\_\+kill\+\_\+command}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+kill\+\_\+command()}{mk\_kill\_command()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+kill\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{sig,  }\item[{char $\ast$}]{job }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape \hyperlink{structKillCommand}{Kill\+Command}} structure and return a copy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sig} & Signal to send to the job\\
+\hline
+{\em job} & Job id number\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Copy of constructed \hyperlink{structKillCommand}{Kill\+Command}
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{unionCommand}{Command}, \hyperlink{structKillCommand}{Kill\+Command} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{command_8c_ab18329e0efa0ff9bff9f41377d85c39d}\label{command_8c_ab18329e0efa0ff9bff9f41377d85c39d}} 
+\index{command.\+c@{command.\+c}!mk\+\_\+pwd\+\_\+command@{mk\+\_\+pwd\+\_\+command}}
+\index{mk\+\_\+pwd\+\_\+command@{mk\+\_\+pwd\+\_\+command}!command.\+c@{command.\+c}}
+\subsubsection{\texorpdfstring{mk\+\_\+pwd\+\_\+command()}{mk\_pwd\_command()}}
+{\footnotesize\ttfamily \hyperlink{unionCommand}{Command} mk\+\_\+pwd\+\_\+command (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create a {\itshape P\+W\+D\+Command} structure and return a copy. 
+
+\begin{DoxyReturn}{Returns}
+Copy of constructed P\+W\+D\+Command
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{unionCommand}{Command}, \hyperlink{command_8h_a0c0e44e3e2b07b1e9b48023205cb4ca2}{P\+W\+D\+Command} 
+\end{DoxySeeAlso}

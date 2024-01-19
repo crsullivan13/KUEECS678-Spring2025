@@ -1,0 +1,70 @@
+\hypertarget{structKillCommand}{}\section{Kill\+Command Struct Reference}
+\label{structKillCommand}\index{Kill\+Command@{Kill\+Command}}
+
+
+\hyperlink{unionCommand}{Command} to kill a process based on it\textquotesingle{}s job id.  
+
+
+
+
+{\ttfamily \#include $<$command.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type} \hyperlink{structKillCommand_a9cd678bc0659f74340e3fca28766bcda}{type}
+\item 
+int \hyperlink{structKillCommand_a20f5367bbec80a936189c57b1f9db351}{sig}
+\item 
+int \hyperlink{structKillCommand_abd4689c605a3dfe202a1779f0d1191ae}{job}
+\item 
+char $\ast$ \hyperlink{structKillCommand_a879a36b90427ec640bef5c92a6c9c24e}{sig\+\_\+str}
+\item 
+char $\ast$ \hyperlink{structKillCommand_a174a9714a69550b0bbf611e59bfbf332}{job\+\_\+str}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{unionCommand}{Command} to kill a process based on it\textquotesingle{}s job id. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{command_8h_aa8311e0de296df9816965be35c31d925}{Command\+Type}, \hyperlink{unionCommand}{Command} 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structKillCommand_abd4689c605a3dfe202a1779f0d1191ae}\label{structKillCommand_abd4689c605a3dfe202a1779f0d1191ae}} 
+\index{Kill\+Command@{Kill\+Command}!job@{job}}
+\index{job@{job}!Kill\+Command@{Kill\+Command}}
+\subsubsection{\texorpdfstring{job}{job}}
+{\footnotesize\ttfamily int Kill\+Command\+::job}
+
+Job id number \mbox{\Hypertarget{structKillCommand_a174a9714a69550b0bbf611e59bfbf332}\label{structKillCommand_a174a9714a69550b0bbf611e59bfbf332}} 
+\index{Kill\+Command@{Kill\+Command}!job\+\_\+str@{job\+\_\+str}}
+\index{job\+\_\+str@{job\+\_\+str}!Kill\+Command@{Kill\+Command}}
+\subsubsection{\texorpdfstring{job\+\_\+str}{job\_str}}
+{\footnotesize\ttfamily char$\ast$ Kill\+Command\+::job\+\_\+str}
+
+String holding the job id number (used for printing) \mbox{\Hypertarget{structKillCommand_a20f5367bbec80a936189c57b1f9db351}\label{structKillCommand_a20f5367bbec80a936189c57b1f9db351}} 
+\index{Kill\+Command@{Kill\+Command}!sig@{sig}}
+\index{sig@{sig}!Kill\+Command@{Kill\+Command}}
+\subsubsection{\texorpdfstring{sig}{sig}}
+{\footnotesize\ttfamily int Kill\+Command\+::sig}
+
+Signal to send to the job \mbox{\Hypertarget{structKillCommand_a879a36b90427ec640bef5c92a6c9c24e}\label{structKillCommand_a879a36b90427ec640bef5c92a6c9c24e}} 
+\index{Kill\+Command@{Kill\+Command}!sig\+\_\+str@{sig\+\_\+str}}
+\index{sig\+\_\+str@{sig\+\_\+str}!Kill\+Command@{Kill\+Command}}
+\subsubsection{\texorpdfstring{sig\+\_\+str}{sig\_str}}
+{\footnotesize\ttfamily char$\ast$ Kill\+Command\+::sig\+\_\+str}
+
+String holding the signal number (used for printing) \mbox{\Hypertarget{structKillCommand_a9cd678bc0659f74340e3fca28766bcda}\label{structKillCommand_a9cd678bc0659f74340e3fca28766bcda}} 
+\index{Kill\+Command@{Kill\+Command}!type@{type}}
+\index{type@{type}!Kill\+Command@{Kill\+Command}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \hyperlink{command_8h_a21e038f5b8958e203d28bc4f18472352}{Command\+Type} Kill\+Command\+::type}
+
+Type of command 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{command_8h}{command.\+h}\end{DoxyCompactItemize}

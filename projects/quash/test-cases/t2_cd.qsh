@@ -1,0 +1,11 @@
+# Change directory into sandbox/dir3
+cd dir3
+
+# List the directory's contents
+ls
+
+# Print the current directory
+pwd
+
+# Print the current directory environment variable
+echo $PWD

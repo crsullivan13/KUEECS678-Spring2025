@@ -1,0 +1,7 @@
+export ORIG_FILE=lorem_ipsum.txt
+export APPEND_FILE=li2.txt
+
+cat $ORIG_FILE > $APPEND_FILE
+cat $ORIG_FILE >> $APPEND_FILE
+
+cat $APPEND_FILE

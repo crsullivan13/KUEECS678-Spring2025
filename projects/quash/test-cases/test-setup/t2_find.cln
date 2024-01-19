@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cp $OUTPUT $OUTPUT.tmp
+cat $OUTPUT.tmp | sort > $OUTPUT
+rm $OUTPUT.tmp

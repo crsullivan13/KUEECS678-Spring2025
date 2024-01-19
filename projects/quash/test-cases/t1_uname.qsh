@@ -1,0 +1,2 @@
+# Test absolute path execution
+/usr/bin/uname

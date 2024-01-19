@@ -1,0 +1,423 @@
+\hypertarget{list_8h}{}\doxysection{list.\+h File Reference}
+\label{list_8h}\index{list.h@{list.h}}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{list_8h_a4642d4b7df28478bb762fe43c85b5c63}{L\+I\+S\+T\+\_\+\+H\+E\+A\+D\+\_\+\+I\+N\+IT}}(name)~\{ \&(name), \&(name) \}
+\item 
+\#define \mbox{\hyperlink{list_8h_a42f0e72af970a790b60a740af8c9ecd0}{L\+I\+S\+T\+\_\+\+H\+E\+AD}}(name)~struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} name = \mbox{\hyperlink{list_8h_a4642d4b7df28478bb762fe43c85b5c63}{L\+I\+S\+T\+\_\+\+H\+E\+A\+D\+\_\+\+I\+N\+IT}}(name)
+\item 
+\#define \mbox{\hyperlink{list_8h_a0ffe9d28c36d7b018a9cfae33bae45c0}{I\+N\+I\+T\+\_\+\+L\+I\+S\+T\+\_\+\+H\+E\+AD}}(ptr)
+\item 
+\#define \mbox{\hyperlink{list_8h_a26c976b7f654e70df318c1843e5094de}{list\+\_\+entry}}(ptr,  type,  member)~((type $\ast$)((char $\ast$)(ptr)-\/(unsigned long)(\&((type $\ast$)0)-\/$>$member)))
+\item 
+\#define \mbox{\hyperlink{list_8h_ab8b24e6660ab3760c923e4b4db3fa502}{list\+\_\+for\+\_\+each}}(pos,  head)
+\item 
+\#define \mbox{\hyperlink{list_8h_a19fc06b83f3502a83ce566b8887e6aec}{list\+\_\+for\+\_\+each\+\_\+prev}}(pos,  head)
+\item 
+\#define \mbox{\hyperlink{list_8h_a9e4b9328744994b9d3878f5dad75c09f}{list\+\_\+for\+\_\+each\+\_\+safe}}(pos,  n,  head)
+\item 
+\#define \mbox{\hyperlink{list_8h_a9b782fefb5ab71ce9762182e45a615e1}{list\+\_\+for\+\_\+each\+\_\+entry}}(pos,  head,  member)
+\item 
+\#define \mbox{\hyperlink{list_8h_ac3f72d6bd5144c7970824813810d2da1}{list\+\_\+for\+\_\+each\+\_\+entry\+\_\+safe}}(pos,  n,  head,  member)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{list_8h_a8a28f150a191624bf6923a48cdace7e3}{\+\_\+\+\_\+list\+\_\+add}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$new, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$prev, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$next)
+\item 
+static void \mbox{\hyperlink{list_8h_a0373c4b3c8ce51a451a569ad978b32e1}{list\+\_\+add}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$new, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$head)
+\item 
+static void \mbox{\hyperlink{list_8h_a588bec046f1e9797b33a5c5ab250f447}{list\+\_\+add\+\_\+tail}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$new, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$head)
+\item 
+static void \mbox{\hyperlink{list_8h_a24b474717d65a296695e8b79b4adefda}{\+\_\+\+\_\+list\+\_\+del}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$prev, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$next)
+\item 
+static void \mbox{\hyperlink{list_8h_ab1708206f0f7e0a56550b35372203ba5}{list\+\_\+del}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$entry)
+\item 
+static void \mbox{\hyperlink{list_8h_ae1cde0f50b85945cfff23be4fc1586f4}{list\+\_\+del\+\_\+init}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$entry)
+\item 
+static void \mbox{\hyperlink{list_8h_aee8df43e41969c2272acfd6ed6e75d4c}{list\+\_\+move}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$list, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$head)
+\item 
+static void \mbox{\hyperlink{list_8h_a1c5ac6a6b04a03f5782e818daacf96e9}{list\+\_\+move\+\_\+tail}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$list, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$head)
+\item 
+static int \mbox{\hyperlink{list_8h_a0fce12be81e8f2677b3a272fee1652ac}{list\+\_\+empty}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$head)
+\item 
+static void \mbox{\hyperlink{list_8h_a25979c80a2d71dd02ada121a46c71a59}{\+\_\+\+\_\+list\+\_\+splice}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$list, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$head)
+\item 
+static void \mbox{\hyperlink{list_8h_a2c4399cfbde5e5d5eddf2e13c97bd5d5}{list\+\_\+splice}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$list, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$head)
+\item 
+static void \mbox{\hyperlink{list_8h_a948b15519bb72e3d42f3e56975580d30}{list\+\_\+splice\+\_\+init}} (struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$list, struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$head)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{list_8h_a0ffe9d28c36d7b018a9cfae33bae45c0}\label{list_8h_a0ffe9d28c36d7b018a9cfae33bae45c0}} 
+\index{list.h@{list.h}!INIT\_LIST\_HEAD@{INIT\_LIST\_HEAD}}
+\index{INIT\_LIST\_HEAD@{INIT\_LIST\_HEAD}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{INIT\_LIST\_HEAD}{INIT\_LIST\_HEAD}}
+{\footnotesize\ttfamily \#define I\+N\+I\+T\+\_\+\+L\+I\+S\+T\+\_\+\+H\+E\+AD(\begin{DoxyParamCaption}\item[{}]{ptr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{do} \{ \(\backslash\)}
+\DoxyCodeLine{        (ptr)-\/>next = (ptr); (ptr)-\/>prev = (ptr); \(\backslash\)}
+\DoxyCodeLine{\} \textcolor{keywordflow}{while} (0)}
+
+\end{DoxyCode}
+
+
+Definition at line 30 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a26c976b7f654e70df318c1843e5094de}\label{list_8h_a26c976b7f654e70df318c1843e5094de}} 
+\index{list.h@{list.h}!list\_entry@{list\_entry}}
+\index{list\_entry@{list\_entry}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_entry}{list\_entry}}
+{\footnotesize\ttfamily \#define list\+\_\+entry(\begin{DoxyParamCaption}\item[{}]{ptr,  }\item[{}]{type,  }\item[{}]{member }\end{DoxyParamCaption})~((type $\ast$)((char $\ast$)(ptr)-\/(unsigned long)(\&((type $\ast$)0)-\/$>$member)))}
+
+list\+\_\+entry -\/ get the struct for this entry 
+\begin{DoxyParams}{Parameters}
+{\em ptr} & the \&struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} pointer. \\
+\hline
+{\em type} & the type of the struct this is embedded in. \\
+\hline
+{\em member} & the name of the list\+\_\+struct within the struct. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 190 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_ab8b24e6660ab3760c923e4b4db3fa502}\label{list_8h_ab8b24e6660ab3760c923e4b4db3fa502}} 
+\index{list.h@{list.h}!list\_for\_each@{list\_for\_each}}
+\index{list\_for\_each@{list\_for\_each}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_for\_each}{list\_for\_each}}
+{\footnotesize\ttfamily \#define list\+\_\+for\+\_\+each(\begin{DoxyParamCaption}\item[{}]{pos,  }\item[{}]{head }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (pos = (head)-\/>next; pos != (head); \(\backslash\)}
+\DoxyCodeLine{                pos = pos-\/>next)}
+
+\end{DoxyCode}
+list\+\_\+for\+\_\+each -\/ iterate over a list 
+\begin{DoxyParams}{Parameters}
+{\em pos} & the \&struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} to use as a loop counter. \\
+\hline
+{\em head} & the head for your list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 198 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a9b782fefb5ab71ce9762182e45a615e1}\label{list_8h_a9b782fefb5ab71ce9762182e45a615e1}} 
+\index{list.h@{list.h}!list\_for\_each\_entry@{list\_for\_each\_entry}}
+\index{list\_for\_each\_entry@{list\_for\_each\_entry}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_for\_each\_entry}{list\_for\_each\_entry}}
+{\footnotesize\ttfamily \#define list\+\_\+for\+\_\+each\+\_\+entry(\begin{DoxyParamCaption}\item[{}]{pos,  }\item[{}]{head,  }\item[{}]{member }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (pos = \mbox{\hyperlink{list_8h_a26c976b7f654e70df318c1843e5094de}{list\_entry}}((head)-\/>next, typeof(*pos), member);    \(\backslash\)}
+\DoxyCodeLine{             \&pos-\/>member != (head);                                    \(\backslash\)}
+\DoxyCodeLine{             pos = \mbox{\hyperlink{list_8h_a26c976b7f654e70df318c1843e5094de}{list\_entry}}(pos-\/>member.next, typeof(*pos), member))}
+
+\end{DoxyCode}
+list\+\_\+for\+\_\+each\+\_\+entry -\/ iterate over list of given type 
+\begin{DoxyParams}{Parameters}
+{\em pos} & the type $\ast$ to use as a loop counter. \\
+\hline
+{\em head} & the head for your list. \\
+\hline
+{\em member} & the name of the list\+\_\+struct within the struct. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 226 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_ac3f72d6bd5144c7970824813810d2da1}\label{list_8h_ac3f72d6bd5144c7970824813810d2da1}} 
+\index{list.h@{list.h}!list\_for\_each\_entry\_safe@{list\_for\_each\_entry\_safe}}
+\index{list\_for\_each\_entry\_safe@{list\_for\_each\_entry\_safe}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_for\_each\_entry\_safe}{list\_for\_each\_entry\_safe}}
+{\footnotesize\ttfamily \#define list\+\_\+for\+\_\+each\+\_\+entry\+\_\+safe(\begin{DoxyParamCaption}\item[{}]{pos,  }\item[{}]{n,  }\item[{}]{head,  }\item[{}]{member }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (pos = \mbox{\hyperlink{list_8h_a26c976b7f654e70df318c1843e5094de}{list\_entry}}((head)-\/>next, typeof(*pos), member),    \(\backslash\)}
+\DoxyCodeLine{                n = \mbox{\hyperlink{list_8h_a26c976b7f654e70df318c1843e5094de}{list\_entry}}(pos-\/>member.next, typeof(*pos), member);   \(\backslash\)}
+\DoxyCodeLine{             \&pos-\/>member != (head);                                    \(\backslash\)}
+\DoxyCodeLine{             pos = n, n = \mbox{\hyperlink{list_8h_a26c976b7f654e70df318c1843e5094de}{list\_entry}}(n-\/>member.next, typeof(*n), member))}
+
+\end{DoxyCode}
+list\+\_\+for\+\_\+each\+\_\+entry\+\_\+safe -\/ iterate over list of given type safe against removal of list entry 
+\begin{DoxyParams}{Parameters}
+{\em pos} & the type $\ast$ to use as a loop counter. \\
+\hline
+{\em n} & another type $\ast$ to use as temporary storage \\
+\hline
+{\em head} & the head for your list. \\
+\hline
+{\em member} & the name of the list\+\_\+struct within the struct. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 238 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a19fc06b83f3502a83ce566b8887e6aec}\label{list_8h_a19fc06b83f3502a83ce566b8887e6aec}} 
+\index{list.h@{list.h}!list\_for\_each\_prev@{list\_for\_each\_prev}}
+\index{list\_for\_each\_prev@{list\_for\_each\_prev}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_for\_each\_prev}{list\_for\_each\_prev}}
+{\footnotesize\ttfamily \#define list\+\_\+for\+\_\+each\+\_\+prev(\begin{DoxyParamCaption}\item[{}]{pos,  }\item[{}]{head }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (pos = (head)-\/>prev; pos != (head); \(\backslash\)}
+\DoxyCodeLine{                pos = pos-\/>prev)}
+
+\end{DoxyCode}
+list\+\_\+for\+\_\+each\+\_\+prev -\/ iterate over a list backwards 
+\begin{DoxyParams}{Parameters}
+{\em pos} & the \&struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} to use as a loop counter. \\
+\hline
+{\em head} & the head for your list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 206 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a9e4b9328744994b9d3878f5dad75c09f}\label{list_8h_a9e4b9328744994b9d3878f5dad75c09f}} 
+\index{list.h@{list.h}!list\_for\_each\_safe@{list\_for\_each\_safe}}
+\index{list\_for\_each\_safe@{list\_for\_each\_safe}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_for\_each\_safe}{list\_for\_each\_safe}}
+{\footnotesize\ttfamily \#define list\+\_\+for\+\_\+each\+\_\+safe(\begin{DoxyParamCaption}\item[{}]{pos,  }\item[{}]{n,  }\item[{}]{head }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (pos = (head)-\/>next, n = pos-\/>next; pos != (head); \(\backslash\)}
+\DoxyCodeLine{                pos = n, n = pos-\/>next)}
+
+\end{DoxyCode}
+list\+\_\+for\+\_\+each\+\_\+safe -\/ iterate over a list safe against removal of list entry 
+\begin{DoxyParams}{Parameters}
+{\em pos} & the \&struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} to use as a loop counter. \\
+\hline
+{\em n} & another \&struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} to use as temporary storage \\
+\hline
+{\em head} & the head for your list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 216 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a42f0e72af970a790b60a740af8c9ecd0}\label{list_8h_a42f0e72af970a790b60a740af8c9ecd0}} 
+\index{list.h@{list.h}!LIST\_HEAD@{LIST\_HEAD}}
+\index{LIST\_HEAD@{LIST\_HEAD}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{LIST\_HEAD}{LIST\_HEAD}}
+{\footnotesize\ttfamily \#define L\+I\+S\+T\+\_\+\+H\+E\+AD(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} name = \mbox{\hyperlink{list_8h_a4642d4b7df28478bb762fe43c85b5c63}{L\+I\+S\+T\+\_\+\+H\+E\+A\+D\+\_\+\+I\+N\+IT}}(name)}
+
+
+
+Definition at line 27 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a4642d4b7df28478bb762fe43c85b5c63}\label{list_8h_a4642d4b7df28478bb762fe43c85b5c63}} 
+\index{list.h@{list.h}!LIST\_HEAD\_INIT@{LIST\_HEAD\_INIT}}
+\index{LIST\_HEAD\_INIT@{LIST\_HEAD\_INIT}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{LIST\_HEAD\_INIT}{LIST\_HEAD\_INIT}}
+{\footnotesize\ttfamily \#define L\+I\+S\+T\+\_\+\+H\+E\+A\+D\+\_\+\+I\+N\+IT(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\{ \&(name), \&(name) \}}
+
+
+
+Definition at line 25 of file list.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{list_8h_a8a28f150a191624bf6923a48cdace7e3}\label{list_8h_a8a28f150a191624bf6923a48cdace7e3}} 
+\index{list.h@{list.h}!\_\_list\_add@{\_\_list\_add}}
+\index{\_\_list\_add@{\_\_list\_add}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{\_\_list\_add()}{\_\_list\_add()}}
+{\footnotesize\ttfamily static void \+\_\+\+\_\+list\+\_\+add (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{new,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{prev,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{next }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 40 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a24b474717d65a296695e8b79b4adefda}\label{list_8h_a24b474717d65a296695e8b79b4adefda}} 
+\index{list.h@{list.h}!\_\_list\_del@{\_\_list\_del}}
+\index{\_\_list\_del@{\_\_list\_del}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{\_\_list\_del()}{\_\_list\_del()}}
+{\footnotesize\ttfamily static void \+\_\+\+\_\+list\+\_\+del (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{prev,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{next }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 83 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a25979c80a2d71dd02ada121a46c71a59}\label{list_8h_a25979c80a2d71dd02ada121a46c71a59}} 
+\index{list.h@{list.h}!\_\_list\_splice@{\_\_list\_splice}}
+\index{\_\_list\_splice@{\_\_list\_splice}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{\_\_list\_splice()}{\_\_list\_splice()}}
+{\footnotesize\ttfamily static void \+\_\+\+\_\+list\+\_\+splice (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{list,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{head }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 143 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a0373c4b3c8ce51a451a569ad978b32e1}\label{list_8h_a0373c4b3c8ce51a451a569ad978b32e1}} 
+\index{list.h@{list.h}!list\_add@{list\_add}}
+\index{list\_add@{list\_add}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_add()}{list\_add()}}
+{\footnotesize\ttfamily static void list\+\_\+add (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{new,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{head }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+add -\/ add a new entry 
+\begin{DoxyParams}{Parameters}
+{\em new} & new entry to be added \\
+\hline
+{\em head} & list head to add it after\\
+\hline
+\end{DoxyParams}
+Insert a new entry after the specified head. This is good for implementing stacks. 
+
+Definition at line 58 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a588bec046f1e9797b33a5c5ab250f447}\label{list_8h_a588bec046f1e9797b33a5c5ab250f447}} 
+\index{list.h@{list.h}!list\_add\_tail@{list\_add\_tail}}
+\index{list\_add\_tail@{list\_add\_tail}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_add\_tail()}{list\_add\_tail()}}
+{\footnotesize\ttfamily static void list\+\_\+add\+\_\+tail (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{new,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{head }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+add\+\_\+tail -\/ add a new entry 
+\begin{DoxyParams}{Parameters}
+{\em new} & new entry to be added \\
+\hline
+{\em head} & list head to add it before\\
+\hline
+\end{DoxyParams}
+Insert a new entry before the specified head. This is useful for implementing queues. 
+
+Definition at line 71 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_ab1708206f0f7e0a56550b35372203ba5}\label{list_8h_ab1708206f0f7e0a56550b35372203ba5}} 
+\index{list.h@{list.h}!list\_del@{list\_del}}
+\index{list\_del@{list\_del}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_del()}{list\_del()}}
+{\footnotesize\ttfamily static void list\+\_\+del (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{entry }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+del -\/ deletes entry from list. 
+\begin{DoxyParams}{Parameters}
+{\em entry} & the element to delete from the list. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+list\+\_\+empty on entry does not return true after this, the entry is in an undefined state. 
+\end{DoxyNote}
+
+
+Definition at line 94 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_ae1cde0f50b85945cfff23be4fc1586f4}\label{list_8h_ae1cde0f50b85945cfff23be4fc1586f4}} 
+\index{list.h@{list.h}!list\_del\_init@{list\_del\_init}}
+\index{list\_del\_init@{list\_del\_init}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_del\_init()}{list\_del\_init()}}
+{\footnotesize\ttfamily static void list\+\_\+del\+\_\+init (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{entry }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+del\+\_\+init -\/ deletes entry from list and reinitialize it. 
+\begin{DoxyParams}{Parameters}
+{\em entry} & the element to delete from the list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 105 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a0fce12be81e8f2677b3a272fee1652ac}\label{list_8h_a0fce12be81e8f2677b3a272fee1652ac}} 
+\index{list.h@{list.h}!list\_empty@{list\_empty}}
+\index{list\_empty@{list\_empty}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_empty()}{list\_empty()}}
+{\footnotesize\ttfamily static int list\+\_\+empty (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{head }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+empty -\/ tests whether a list is empty 
+\begin{DoxyParams}{Parameters}
+{\em head} & the list to test. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 138 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_aee8df43e41969c2272acfd6ed6e75d4c}\label{list_8h_aee8df43e41969c2272acfd6ed6e75d4c}} 
+\index{list.h@{list.h}!list\_move@{list\_move}}
+\index{list\_move@{list\_move}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_move()}{list\_move()}}
+{\footnotesize\ttfamily static void list\+\_\+move (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{list,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{head }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+move -\/ delete from one list and add as another\textquotesingle{}s head 
+\begin{DoxyParams}{Parameters}
+{\em list} & the entry to move \\
+\hline
+{\em head} & the head that will precede our entry \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 116 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a1c5ac6a6b04a03f5782e818daacf96e9}\label{list_8h_a1c5ac6a6b04a03f5782e818daacf96e9}} 
+\index{list.h@{list.h}!list\_move\_tail@{list\_move\_tail}}
+\index{list\_move\_tail@{list\_move\_tail}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_move\_tail()}{list\_move\_tail()}}
+{\footnotesize\ttfamily static void list\+\_\+move\+\_\+tail (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{list,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{head }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+move\+\_\+tail -\/ delete from one list and add as another\textquotesingle{}s tail 
+\begin{DoxyParams}{Parameters}
+{\em list} & the entry to move \\
+\hline
+{\em head} & the head that will follow our entry \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 127 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a2c4399cfbde5e5d5eddf2e13c97bd5d5}\label{list_8h_a2c4399cfbde5e5d5eddf2e13c97bd5d5}} 
+\index{list.h@{list.h}!list\_splice@{list\_splice}}
+\index{list\_splice@{list\_splice}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_splice()}{list\_splice()}}
+{\footnotesize\ttfamily static void list\+\_\+splice (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{list,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{head }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+splice -\/ join two lists 
+\begin{DoxyParams}{Parameters}
+{\em list} & the new list to add. \\
+\hline
+{\em head} & the place to add it in the first list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 162 of file list.\+h.
+
+\mbox{\Hypertarget{list_8h_a948b15519bb72e3d42f3e56975580d30}\label{list_8h_a948b15519bb72e3d42f3e56975580d30}} 
+\index{list.h@{list.h}!list\_splice\_init@{list\_splice\_init}}
+\index{list\_splice\_init@{list\_splice\_init}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{list\_splice\_init()}{list\_splice\_init()}}
+{\footnotesize\ttfamily static void list\+\_\+splice\+\_\+init (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{list,  }\item[{struct \mbox{\hyperlink{structlist__head}{list\+\_\+head}} $\ast$}]{head }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+list\+\_\+splice\+\_\+init -\/ join two lists and reinitialise the emptied list. 
+\begin{DoxyParams}{Parameters}
+{\em list} & the new list to add. \\
+\hline
+{\em head} & the place to add it in the first list.\\
+\hline
+\end{DoxyParams}
+The list at the list parameter is reinitialised 
+
+Definition at line 175 of file list.\+h.
+

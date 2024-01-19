@@ -1,0 +1,14 @@
+# Print the current working directory
+pwd
+
+# Change the PWD environment variable
+export PWD=$HOME
+
+# This should NOT change from the previous execution
+pwd
+
+# This should change the path to the root directory
+export PATH=/
+
+# This command should not be resolved
+ls

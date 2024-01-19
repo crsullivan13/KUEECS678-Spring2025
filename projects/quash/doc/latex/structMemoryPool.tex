@@ -1,0 +1,34 @@
+\hypertarget{structMemoryPool}{}\section{Memory\+Pool Struct Reference}
+\label{structMemoryPool}\index{Memory\+Pool@{Memory\+Pool}}
+
+
+Holds a block of memory that can be used for allocations.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structMemoryPool_aac9222b12332558fb831f4b9b4400763}\label{structMemoryPool_aac9222b12332558fb831f4b9b4400763}} 
+void $\ast$ {\bfseries pool}
+\item 
+\mbox{\Hypertarget{structMemoryPool_af554fe1d65607ebfd49e195db299b827}\label{structMemoryPool_af554fe1d65607ebfd49e195db299b827}} 
+size\+\_\+t {\bfseries size}
+\item 
+\mbox{\Hypertarget{structMemoryPool_af5fd87a1dc44d4e5ea496d403c426d92}\label{structMemoryPool_af5fd87a1dc44d4e5ea496d403c426d92}} 
+void $\ast$ {\bfseries next}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds a block of memory that can be used for allocations. 
+
+The advantage of a \hyperlink{structMemoryPool}{Memory\+Pool} is that we can free the entire block at once. This can help prevent memory leaks in code that creates structures from the bottom up (such as the parser) and can fail leaving the top most portion of the structure uninitialized.
+
+\begin{DoxyNote}{Note}
+A single memory pool can run out of space fast or will take up quite a bit of unnecessary space in memory. To combat this problem the {\itshape Memory\+Pool\+Deque} allows the creation of a larger additional \hyperlink{structMemoryPool}{Memory\+Pool} to handle the allocation. 
+\end{DoxyNote}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/parsing/memory\+\_\+pool.\+c\end{DoxyCompactItemize}
