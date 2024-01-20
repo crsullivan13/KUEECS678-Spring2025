@@ -1,75 +1,272 @@
-<html><head>
+<html>
+
+<head>
   <base>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> EECS678 Introduction to Operating Systems </title>
+
   <style>
-    BODY,P,BR,TABLE,TR,TD {
-      font-size:10pt; font-family:Verdana, Arial,     ;
+    BODY,
+    P,
+    BR,
+    TABLE,
+    TR,
+    TD {
+      font-size: 10pt;
+      font-family: Verdana, Arial, ;
     }
 
-    table, td, th {
-    font-size: 1em;
-    border: 1px solid #000;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
+    table,
+    td,
+    th {
+      font-size: 1em;
+      border: 1px solid #000;
+      border-collapse: collapse;
+      margin: 0;
+      padding: 0;
     }
 
-    td,th{
-    padding:.2em .5em;
-    vertical-align:top;
-    font-weight:normal;
+    td,
+    th {
+      padding: .2em .5em;
+      vertical-align: top;
+      font-weight: normal;
     }
 
-    thead th{
-    text-transform:uppercase;
-    background:#666;
-    color:#fff;
+    thead th {
+      text-transform: uppercase;
+      background: #666;
+      color: #fff;
+    }
+
+    .container-md {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .row {
+
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
   </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 
 
 <body>
-<center>
-<h1> EECS678 Introduction to Operating Systems </h1>
-<h2> Spring 2024 </h2>
-</center>
+  <div class="container-md">
+    <center>
+      <h1> University of Kansas </h1>
+      <h2> EECS678 Introduction to Operating Systems </h2>
+      <h3> Spring 2024 </h3>
+    </center>
+  </div>
 
-<font size="+2">Labs</font>
-<ol>
-    <font size="+1"><li>Lab 1 - <a href="Lab1/lab1_gdb.html">Debugger (gdb)</a></li></font><br>
-    <!--<font size="+1"><li>Lab 2 - <a href="Lab2/lab2_signal.html">POSIX Signals</a></li></font><br>
-    <font size="+1"><li>Lab 3 - <a href="Lab3/lab3_process_ipc.html">Shell, Process and IPC</a></li></font><br>
-    <font size="+1"><li>Lab 4 - <a href="Lab4/lab4_practice.html">Fork, IPC and Thread Practice</a></li></font><br>
-    <font size="+1"><li>Lab 5 - <a href="Lab5/lab5_pthreadintro.html">PThreads Introduction</a></li></font><br/>
-    <font size="+1"><li>Lab 6 - <a href="Lab6/lab6_pthreaddp.html">Dining Philosopher's Problem</a></li></font><br/>
-    <font size="+1"><li>Lab 7 - <a href="Lab7/lab7_scheduler1.html">Scheduler - Part One (Priority Queue)</a></li></font><br/>
-    <font size="+1"><li>Lab 8 - <a href="Lab8/lab8_scheduler2.html">Scheduler- Part two</a></li></font><br>
-    <font size="+1"><li>Lab 9 - <a href="Lab9/lab9_pagingmm.html">Memory Management using Paging</a></li></font><br>
-    <font size="+1"><li>Lab 10 - <a href="Lab10/lab10_memio.html">Memory Mapped I/O</a></li></font><br>
-    <font size="+1"><li>Lab 11 - <a href="Lab11/lab11_procfs.html">Proc FileSystem</a></li></font><br>
-    <font size="+1"><li>Lab 12 - <a href="Lab12/Lab12_system_calls.html">System Calls-(Optional Lab)</a></li></font><br>-->
-</ol>
+  <div class="container-md">
+
+    <div class="row">
+
+
+      <div class="col-md-6 ">
 
 
 
-<!--<font size="+2">Projects</font>
-<ol>
-  <font size="+1"></font><li><font size="+1"><a href="projects/quash/doc/html/index.html">Project 1 - Quash</a><br><br><b>Deadline - 03/10/2023 (Friday) - 11:59 PM</b><br>Please submit through your lab section's Canvas<br> <br><a href="https://docs.google.com/spreadsheets/d/19k2u9T33kAppijg0htkrhsAioR6LKY4bWfe4pvB4KpU/edit?usp=sharing"> Spreadsheet for Quash project </a><br><br>Please fill out your Quash project team details in above spreadsheet<br><br><b><font color="red">Please make sure NOT to upload your code in any public repository</font></b></font></li><br>
-  
+        <div class="row lab_row">
+          <div class="col">
+            <button class="btn btn-primary w-100 text-start" type="button" data-bs-toggle="collapse"
+              data-bs-target="#labCollapse" aria-expanded="false" aria-controls="labCollapse">
+              <font size="+2">Labs</font>
+            </button>
+            <ol class="collapse show" id="labCollapse">
+              <font size="+1">
+                <li>Lab 1 - <a href="Lab1/lab1_gdb.html">Debugger (gdb)</a></li>
+              </font><br>
+              <!--<font size="+1">
+                <li>Lab 2 - <a href="Lab2/lab2_signal.html">POSIX Signals</a></li>
+              </font><br>
+              <font size="+1">
+                <li>Lab 3 - <a href="Lab3/lab3_process_ipc.html">Shell, Process and IPC</a></li>
+              </font><br>
+              <font size="+1">
+                <li>Lab 4 - <a href="Lab4/lab4_practice.html">Fork, IPC and Thread Practice</a></li>
+              </font><br>
+              <font size="+1">
+                <li>Lab 5 - <a href="Lab5/lab5_pthreadintro.html">PThreads Introduction</a></li>
+              </font><br />
+              <font size="+1">
+                <li>Lab 6 - <a href="Lab6/lab6_pthreaddp.html">Dining Philosopher's Problem</a></li>
+              </font><br />
+              <font size="+1">
+                <li>Lab 7 - <a href="Lab7/lab7_scheduler1.html">Scheduler - Part One (Priority Queue)</a></li>
+              </font><br />
+              <font size="+1">
+                <li>Lab 8 - <a href="Lab8/lab8_scheduler2.html">Scheduler- Part two</a></li>
+              </font><br>
+              <font size="+1">
+                <li>Lab 9 - <a href="Lab9/lab9_pagingmm.html">Memory Management using Paging</a></li>
+              </font><br>
+              <font size="+1">
+                <li>Lab 10 - <a href="Lab10/lab10_memio.html">Memory Mapped I/O</a></li>
+              </font><br>
+              <font size="+1">
+                <li>Lab 11 - <a href="Lab11/lab11_procfs.html">Proc FileSystem</a></li>
+              </font><br>
+              <font size="+1">
+                <li>Lab 12 - <a href="Lab12/Lab12_system_calls.html">System Calls-(Optional Lab)</a></li>
+              </font><br>-->
+            </ol>
+          </div>
+        </div>
 
-  <font size="+1"></font><li><font size="+1"><a href="projects/buddy/doc/html/index.html">Project 2 - Buddy allocator</a><br><br><b>Deadline - 04/28/2023 (Friday) - 11:59 PM</b><br>Please submit through your lab section's Canvas<br> <br><a href="https://docs.google.com/spreadsheets/d/1YAWfuOzCVPCdSZRESQzrYPc2m88kuyxoPi2CrJOnEu8/edit?usp=sharing"> Spreadsheet for Buddy project </a><br><br>Please fill out your Buddy allocator project team details in above spreadsheet<br><br><b><font color="red">Please make sure NOT to upload your code in any public repository</font></b></font></li><br>
- </ol>
- 
- 
-
-<font size="+2">Notice</font>-->
-<ul>
-  <font size="+1"><li><a href="./Setting_up_Workspace_for_EECS_678_Labs.pdf">Setting up Workspace</a></li></font>
-</ul>
 
 
+        <div class="row lab_row">
+          <div class="col">
+            <button class="btn btn-primary w-100 text-start" type="button" data-bs-toggle="collapse"
+              data-bs-target="#projectCollapse" aria-expanded="false" aria-controls="projectCollapse">
+              <font size="+2">Projects</font>
+            </button>
+            <ol class="collapse" id="projectCollapse">
+              <font size="+1">
+                No Projects released yet
+              </font>
+              <!--<font size="+1"></font>
+              <li>
+                <font size="+1"><a href="projects/quash/doc/html/index.html">Project 1 - Quash</a><br><br><b>Deadline -
+                    03/10/2023 (Friday) - 11:59 PM</b><br>Please submit through your lab section's Canvas<br> <br><a
+                    href="https://docs.google.com/spreadsheets/d/19k2u9T33kAppijg0htkrhsAioR6LKY4bWfe4pvB4KpU/edit?usp=sharing">
+                    Spreadsheet for Quash project </a><br><br>Please fill out your Quash project team details in above
+                  spreadsheet<br><br><b>
+                    <font color="red">Please make sure NOT to upload your code in any public repository</font>
+                  </b></font>
+              </li><br>
 
 
-</body></html>
+              <font size="+1"></font>
+              <li>
+                <font size="+1"><a href="projects/buddy/doc/html/index.html">Project 2 - Buddy
+                    allocator</a><br><br><b>Deadline - 04/28/2023 (Friday) - 11:59 PM</b><br>Please submit through your
+                  lab
+                  section's Canvas<br> <br><a
+                    href="https://docs.google.com/spreadsheets/d/1YAWfuOzCVPCdSZRESQzrYPc2m88kuyxoPi2CrJOnEu8/edit?usp=sharing">
+                    Spreadsheet for Buddy project </a><br><br>Please fill out your Buddy allocator project team details
+                  in
+                  above spreadsheet<br><br><b>
+                    <font color="red">Please make sure NOT to upload your code in any public repository</font>
+                  </b></font>
+              </li><br>-->
+            </ol>
+          </div>
+
+
+          <div class="row lab_row">
+            <div class="col">
+              <font size="+2">Notice</font>
+              <ul>
+                <font size="+1">
+                  <li><a href="./Setting_up_Workspace_for_EECS_678_Labs.pdf">Setting up Workspace</a></li>
+                </font>
+                <font size="+1">
+                  <li><a href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL Setup</a></li>
+                </font>
+              </ul>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+
+      <div class="col-md-5 offset-md-1">
+        <div class="row">
+          <h4>Lecturer: Dr. Heechul Yun</h4>
+        </div>
+
+        <div class="row">
+          <h4>Teaching Assistants:</h4>
+          <div class="row">
+            <div class="col offset-1">
+              <h5>Mohammed Misbah Zarrar</h5>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <strong>Lab (47944):</strong> Mon, 04:00 - 05:50 p.m
+                </li>
+                <li class="list-group-item">
+                  <strong>Lab (44498):</strong> Wed, 09:00 - 10:50 a.m.
+                </li>
+                <li class="list-group-item">
+                  <strong>Office Hours:</strong> Room Number 2027
+                  <ul>
+                    <li>Room Number: 2027</li>
+                    <li>Mon: 03:00 to 04:00 pm</li>
+                    <li>Wed: 11:00 to 12:00 pm</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col offset-1">
+              <h5>Bakhbyergyen Yerjan</h5>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <strong>Lab (46156):</strong> Mon, 12:00 - 01:50 p.m
+                </li>
+                <li class="list-group-item">
+                  <strong>Lab (43052):</strong> Wed, 04:00 - 5:50 p.m.
+                </li>
+                <li class="list-group-item">
+                  <strong>Office Hours:</strong> Room Number 2027
+                  <ul>
+                    <li>Room Number: 2027</li>
+                    <li>Tue: 09:30 to 10:30 am</li>
+                    <li>Thu: 09:30 to 10:30 am</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col offset-1">
+              
+              <h5>Conor</h5>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <strong>Lab (55004):</strong> Tue, 11:00 - 12:50 p.m
+                </li>
+                <li class="list-group-item">
+                  <strong>Lab (45278):</strong> Fri, 12:00 - 1:50 p.m.
+                </li>
+                <li class="list-group-item">
+                  <strong>Office Hours:</strong> Room Number 2027
+                  <ul>
+                    <li>Room Number: 2027</li>
+                    <li>Mon: 11:00 to 12:00 pm</li>
+                    <li>Thu: 11:30 to 12:30 pm</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
