@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html
+xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Oswald|Roboto" rel="stylesheet">
+<title>Lab 0 - C Primer</title>
+<style type="text/css">
+.heading1 {
+	font-family: 'Oswald', sans-serif;
+	font-size: xx-large;
+	text-align: Center;
+	color: rgb(0, 0, 0);
+}
+.heading2 {
+	font-family: 'Roboto', sans-serif;
+	font-size: large;
+}
+.body1 {
+	font-family: 'Roboto', sans-serif;
+	font-size: large;
+}
+.body2 {
+	font-family: 'Roboto', sans-serif;
+	font-size: large;
+}
+.coding1 {
+	font-family: 'Cutive Mono', monospace;
+	font-size: medium;
+}
+</style>
+</head>
+
+<body>
+
+<p class="heading1"><strong>Lab 0 - C Primer</strong></p>
+<hr color="blue" width="100%" size=2px>
+
+<p class="heading2">
+	<strong>Practice with C Programming:</strong> This lab serves to reinforce your 
+	proficiency in C programming, particularly with pointers, 
+	dynamic memory allocation (malloc), and manual memory management (free), 
+	which are critical for systems programming and performance-sensitive applications.
+</p>
+
+<p class="heading1">Lab Materials</p>
+<hr color="blue" width="100%" size=2px>
+
+<ul class="body1">
+	<li><a href="CPrimerLab.pdf">Slides</a></li>
+	<li><a href="eecs678_lab0_c_primer.tar.gz">Lab materials</a></li>
+</ul>
+
+<p class="heading1">Discussion Videos</p>
+<ol>
+	<li><a href="https://youtu.be/Ls0igXnMEzs">C Primer</a></li>
+</ol>
+
+<p class="heading1">Assignment</p>
+<hr color="blue" width="100%" size=2px>
+
+<span class="body1"> 
+The sample program compiles but fails the test-cases:
+</span>
+
+<pre class="coding1">
+$ make
+	gcc -Wall -g -I. -ITests -o runTests main.c
+	In file included from Tests/test1.h:4,
+					 from main.c:1:
+	./LinkedList.h:46:21: warning: ‘createNode’ defined but not used [-Wunused-function]
+	   46 | static struct Node* createNode(int data)
+		  |                     ^~~~~~~~~~
+	Program has been compiled!
+
+$./runTests
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Merge Test Passed: Both lists were empty, and merge returned NULL as expected.
+	Cycle Detection Test Passed: No cycle detected, as expected with empty lists.
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Merge Test Failed: Function returned NULL.
+	Cycle Detection Test Failed: Merged list is NULL.
+	Total Score: 28/100
+</pre> 
+
+<span class="body1"> 
+Your tasks for this lab are as follows: 
+
+<ol>
+	<li>
+		<strong>Learn Linked List Implementation:</strong> You practice implementing core operations on linked lists, 
+		such as node creation, insertion, traversal, and deletion. 
+		This helps build your understanding of memory management 
+		(dynamic memory allocation and deallocation), pointers, and 
+		struct usage in C.
+	</li>
+	<li>
+		<strong>Solve Real-World Problems:</strong> By solving problems such as detecting cycles in linked lists and merging 
+		two sorted lists, you apply your understanding of algorithms and data structures to real-world scenarios. 
+		These problems introduce concepts like fast/slow pointer techniques (cycle detection) and algorithmic merging 
+		(sorting and combining data structures).	
+	</li>
+</ol>
+</span>
+
+<span class="body1"> 
+	On successfully completing your task: 
+</span>
+<pre class="coding1">
+$ make runTests
+$ ./runTests
+	Merged List: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Merged List: 1 -> 2 -> 3 -> 4 -> 5 -> 7 -> 9 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Merged List: 2 -> 4 -> 6 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Merge Test Passed: Both lists were empty, and merge returned NULL as expected.
+	Cycle Detection Test Passed: No cycle detected, as expected with empty lists.
+	Merged List: 1 -> 1 -> 3 -> 3 -> 5 -> 5 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Merged List: 1 -> 3 -> 5 -> 7 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Merged List: 2 -> 2 -> 4 -> 6 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Merged List: -10 -> -8 -> -3 -> 2 -> 5 -> 7 -> 20 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Merged List: 1 -> 2 -> 3 -> 4 -> 6 -> 7 -> 8 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Merged List: 1 -> 2 -> 3 -> 10 -> 20 -> 30 -> NULL
+	Merge Test Passed.
+	Cycle Detection Test Passed.
+	Total Score: 100/100
+</pre>
+
+<p class="heading1">Evaluation</p>
+<hr color="blue" width="100%" size=2px>
+
+<span class="body1"> 
+<ul>
+	<li>75% (Submission) - 80% of your total score will be based on the code you submit on Canvas, evaluated through './runTests'.</li>
+	<li>10% (Quiz) - A short quiz on C will be open on following week during the lab hours  </li>
+	<li>15% (Demo) - A quick demo of your submission will be taken on the following week during the lab hours (Questions will be asked) </li>
+</ul>
+
+<!-- <strong>Note:</strong>
+<ul>
+	<li></li>
+</ul> -->
+Please compress your source code along with the original files and submit it through Canvas.
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<p><a href="../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>
