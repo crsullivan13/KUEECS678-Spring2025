@@ -21,19 +21,16 @@
 	<tr>
 		<td bgcolor="#C0C0C0" class="auto-style1">
 		<b style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: x-large; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: -webkit-left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(204, 204, 204);">
-		Lab 8: Scheduler - Part Two (Scheduler)</b></td>
+		Lab 7: Scheduler</b></td>
 	</tr>
 </table>
 <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
 One piece of software that every modern operating system must contain in a scheduler: without one, only one task could be run at a time. 
-You will be writing a library in labs 7 and 8 to perform basic scheduling of tasks. Rather than interacting directly with the operating system, we have provided for you a discrete event simulator: we will simulate time, jobs arriving, and jobs running. 
+You will be writing a library in lab 7 to perform basic scheduling of tasks. Rather than interacting directly with the operating system, we have provided for you a discrete event simulator: we will simulate time, jobs arriving, and jobs running. 
 Your library will inform the scheduler which job should run next.
-Labs 7 and 8 will be on implementing a simulation of different scheduling algorithms of an operating system. We will divide the labs into the following two sections.
-
-<ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
-	<li>Lab 7 - In previous lab (lab 8), we have implemented a priority queue data structure to keep track of the different jobs/processes in the simulation.</li>
-	<li>Lab 8 - In today's lab (lab 9), we will use the priority queue data structure from lab 8, to implement different scheduling policies.</li>
-</ol>
+Lab 7 will be on implementing a simulation of different scheduling algorithms of an operating system.
+We have implemented a priority queue data structure to keep track of the different jobs/processes in the simulation.
+We will use the priority queue data structure that is given to you for implementing different scheduling policies.</li>
 </p>
 
 <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: large; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
@@ -45,9 +42,9 @@ Labs 7 and 8 will be on implementing a simulation of different scheduling algori
 	</tr>
 </table>
 <ol>
-     <li><a href="Lab_8_Slides.pdf">Slides</a></li>
-	<li><a href="eecs678-scheduler2.tar">Lab Files</a></li>
-	<li>Example Simulations: 
+     <li><a href="Lab_7_Slides.pdf">Slides</a></li>
+	<li><a href="eecs678-scheduler.tar">Lab Files</a></li>
+	<li>Example Simulations:
 		<ul>
 			<li><a href="example1.html">Example 1</a></li>
 			<li><a href="example2.html">Example 2</a></li>
@@ -197,17 +194,16 @@ You will have to implement the following functions inside libscheduler.c:</p>
 </ul>
 
 
-<h2>[Part 1]: Priority Queue</h2>
+<h2>[Part 1]: Priority Queue (GIVEN)</h2>
 <p>
-	To build a scheduler, a fundamental data structure is a priority queue.  The first part of this lab requires you to complete <tt>libpriqueue</tt>, a priority
-	queue library.  You will be using this library in your scheduler.
+	A scheduler needs a fundamental data structure that is a priority queue.  
+	You will be using this a priority queue library in your scheduler.
 </p>
 
 <h3>libpriqueue API</h3>
 <p>
-	To complete <tt>libpriqueue</tt>, you must implement the functions outlined in <tt>libpriqueue.c</tt>.
-	Full function descriptions are provided for each function.  <b>In every function</b>, you may assume that all pointers given will be valid,
-	non-<tt>NULL</tt> pointers.
+	Full function descriptions are provided for each function outlined in <tt>libpriqueue.c</tt>.  
+	<b>In every function</b>, you may assume that all pointers given will be valid, non-<tt>NULL</tt> pointers.
 </p>
 
 <h2>[Part 2]: Scheduler</h2>
@@ -330,22 +326,40 @@ We provide three sample schedules: <tt>examples/proc1.csv</tt>, <tt>examples/pro
 <b>It's only important that lines starting with <tt>FINAL TIMING DIAGRAM</tt> match.</b> We will not grade any output except the last few lines, as <tt>show_queue()</tt> is not required to be implemented
 in the same way as we did.<br />
 <br />
+
+<p>&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Test</strong></td>
+	</tr>
+</table>
+
 To test your program aganist all the test cases in an automated way, we provide a simple perl script.  To run all 54 tests, simply run:
 <blockquote>
 	perl examples.pl
 </blockquote>
+<blockquote>
+	or
+</blockquote>
+<blockquote>
+	make test
+</blockquote>
 All differences will be printed.  Therefore, if no data is printed, your program has passed the test cases in the <tt>examples</tt> directory.
 
 
-<h2>Grading, Submission, and Other Details</h2>
+<p>&nbsp;</p>
+<table style="width: 100%">
+	<tr>
+		<td bgcolor="#C0C0C0" class="auto-style2"><strong>Grading, Submission, and Other Details</strong></td>
+	</tr>
+</table>
 
 The grading will be broken down by the following percentages:
 <ul>
-	<li>30% for <tt>libpriqueue</tt></li>
-	<li>40% for <tt>libscheduler</tt> running with 1 core</li>
-	<li>10% for <tt>libscheduler</tt> running with N core</li>
+	<li>50% for <tt>libscheduler</tt> running with 1 core</li>
+	<li>25% for <tt>libscheduler</tt> running with N core</li>
 	<li>10% for Lab Quiz</li>
-	<li>10% for Demo</li>
+	<li>15% for Demo</li>
 </ul>
 
 <p>&nbsp;</p>
