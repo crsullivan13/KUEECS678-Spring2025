@@ -392,7 +392,7 @@ root@debian:~# chown your_first_name:your_first_name /home/your_first_name/.vimr
                 To build the kernel, run the commands (in order shown):<br />
         <br />
         <b>&gt; sudo make olddefconfig<span class="Apple-converted-space">&nbsp;</span></b><br />
-        <b>&gt; sudo make -j 2<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <b>&gt; sudo make -j $(nproc)<span class="Apple-converted-space">&nbsp;</span></b><br />
 
   <br/>
         This will build the kernel. The build process takes a while. Go ahead and relax, <a href="https://xkcd.com/303/">check your favorite
