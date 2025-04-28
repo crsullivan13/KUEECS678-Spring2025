@@ -101,7 +101,7 @@ Table of Contents:</h3>
 <table style="width: 100%">
         <tr></tr>
                 <td bgcolor="#C0C0C0" class="auto-style2"><strong>
-                <a name="Installing QEMU"></a>Installing QEMU (No need for this step, if you already have QEMU functional from lab 2)</strong></td>
+                <a name="Installing QEMU"></a>Installing QEMU</strong></td>
         </tr>
 </table>
 <span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
@@ -122,17 +122,13 @@ Table of Contents:</h3>
         </tr>
 </table>
 <span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
-<p>Like lab2, we will need a base image first. Then, we will create a differential image off the base image.</p>
+<p>We will need a base image first. Then, we will create a differential image off the base image.</p>
 <ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
         <li>
-                For the base image, we have two options:<br/><br/>
+                For the base image:<br/><br/>
                 <ul>
                         <li>
-                                You can either use the base image that you had copied from the cycle servers during lab2.
-                        </li>
-                        &nbsp;
-                        <li>
-                                Or, you can fetch the base image from the cycle servers using the following command:
+                                Fetch the base image from the OneDrive link using the following command:
                                 <pre style="margin-left: 40px;">scp your_ku_online_id@cycle1.eecs.ku.edu:/srv/EECS_678/eecs678_base.qcow .</pre>
                         </li>
                 </ul>
@@ -143,11 +139,10 @@ Table of Contents:</h3>
         </li>
         &nbsp;
         <li>
-                Then, create a differential image off this local copy of the base image. Even though we have already created a differential image for lab2,
-                we will need a new differential image. The command is:
-                <br/><br/><b>&gt; qemu-img create -f qcow2 -b [base_image] [diff_image]<span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
+                Then, create a differential image off this local copy of the base image. Do this so you don't break something in the base image. The command is:
+                <br/><br/><b>&gt; qemu-img create -f qcow2 -F qcow2 -b [base_image] [diff_image]<span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
                 This example creates a differential image named 'your_first_name.qcow':
-                <pre style="margin-left: 40px;">qemu-img create -f qcow2 -b eecs678_base.qcow your_first_name.qcow</pre>
+                <pre style="margin-left: 40px;">qemu-img create -f qcow2 -F qcow2 -b debian12-eecs678.qcow2 your_first_name.qcow2</pre>
         </li>
 </ol>
 <p>&nbsp;</p>
@@ -163,13 +158,13 @@ You will do this much more often. There are several options for booting into
 your image.</span><ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
         <li>The basic command for booting into your image is:<br />
         <br />
-        <b>&gt; qemu-system-x86_64 -hda [boot-img] -m [mem]<span class="Apple-converted-space">&nbsp;</span></b><br />
+        <b>&gt; qemu-system-x86_64 [boot-img] -m [mem]<span class="Apple-converted-space">&nbsp;</span></b><br />
         <br />
-        This example boots into the image 'your_first_name.qcow' and simulates it on a
+        This example boots into the image 'your_name.qcow2' and simulates it on a
         machine with 2048M of memory:
-        <pre style="margin-left: 40px;">qemu-system-x86_64 -hda your_first_name.qcow -smp 2 -m 2048M</pre>
+        <pre style="margin-left: 40px;">qemu-system-x86_64 -m 2048 -smp 2 -drive file=your_name.qcow2,format=qcow2 -net nic -net user</pre>
         <p>Here, -smp value denotes the number of cores and -m value denotes the amount of RAM we want to allocate to the QEMU system.
-        This will depend on how many cores and how much memory, you are willing to share from your physical machine with the QEMU system.                
+        This will depend on how many cores and how much memory, you are willing to share from your physical machine with the QEMU system. You should give more than 2048 MB and more than two cores if you can.                
         </p>
         </li>
 </ol>
@@ -206,7 +201,7 @@ Retype new UNIX password:
 passwd: password updated successfully
 Changing the user information for your_first_name
 Enter the new value, or press ENTER for the default
-        Full Name []: 
+        Full Name []:
         Room Number []:
         Work Phone []:
         Home Phone []:
@@ -394,8 +389,9 @@ root@debian:~# chown your_first_name:your_first_name /home/your_first_name/.vimr
 </table>
 
         <li>
-                To build the kernel, run the command:<br />
+                To build the kernel, run the commands (in order shown):<br />
         <br />
+        <b>&gt; sudo make olddefconfig<span class="Apple-converted-space">&nbsp;</span></b><br />
         <b>&gt; sudo make -j 2<span class="Apple-converted-space">&nbsp;</span></b><br />
 
   <br/>
